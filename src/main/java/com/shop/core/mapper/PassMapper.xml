@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shop.mapper.PassMapper" >
-  <resultMap id="BaseResultMap" type="com.shop.model.Pass" >
+<mapper namespace="com.shop.core.mapper.PassMapper" >
+  <resultMap id="BaseResultMap" type="com.shop.core.model.Pass" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="serial_number" property="serialNumber" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="BIT" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List" >
     id, serial_number, status, create_at, update_at
   </sql>
-  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.model.PassCondition" >
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.core.model.PassCondition" >
     select
     <if test="distinct" >
       distinct
@@ -96,13 +96,13 @@
     delete from pass
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByCondition" parameterType="com.shop.model.PassCondition" >
+  <delete id="deleteByCondition" parameterType="com.shop.core.model.PassCondition" >
     delete from pass
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shop.model.Pass" >
+  <insert id="insert" parameterType="com.shop.core.model.Pass" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -111,7 +111,7 @@
     values (#{serialNumber,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{createAt,jdbcType=TIMESTAMP}, 
       #{updateAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.shop.model.Pass" >
+  <insert id="insertSelective" parameterType="com.shop.core.model.Pass" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -145,7 +145,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCondition" parameterType="com.shop.model.PassCondition" resultType="java.lang.Integer" >
+  <select id="countByCondition" parameterType="com.shop.core.model.PassCondition" resultType="java.lang.Integer" >
     select count(*) from pass
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
@@ -185,7 +185,7 @@
       <include refid="Update_By_Condition_Where_Clause" />
     </if>
   </update>
-  <update id="updateByIdSelective" parameterType="com.shop.model.Pass" >
+  <update id="updateByIdSelective" parameterType="com.shop.core.model.Pass" >
     update pass
     <set >
       <if test="serialNumber != null" >
@@ -203,7 +203,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateById" parameterType="com.shop.model.Pass" >
+  <update id="updateById" parameterType="com.shop.core.model.Pass" >
     update pass
     set serial_number = #{serialNumber,jdbcType=INTEGER},
       status = #{status,jdbcType=BIT},

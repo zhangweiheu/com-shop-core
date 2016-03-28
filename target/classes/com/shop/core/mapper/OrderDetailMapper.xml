@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shop.mapper.OrderDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.shop.model.OrderDetail" >
+<mapper namespace="com.shop.core.mapper.OrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.shop.core.model.OrderDetail" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
@@ -74,7 +74,7 @@
     id, user_id, order_id, goods_id, goods_count, goods_price, total_price, update_at, 
     create_at
   </sql>
-  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.model.OrderDetailCondition" >
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.core.model.OrderDetailCondition" >
     select
     <if test="distinct" >
       distinct
@@ -101,13 +101,13 @@
     delete from order_detail
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByCondition" parameterType="com.shop.model.OrderDetailCondition" >
+  <delete id="deleteByCondition" parameterType="com.shop.core.model.OrderDetailCondition" >
     delete from order_detail
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shop.model.OrderDetail" >
+  <insert id="insert" parameterType="com.shop.core.model.OrderDetail" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -118,7 +118,7 @@
       #{goodsCount,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{totalPrice,jdbcType=INTEGER}, 
       #{updateAt,jdbcType=TIMESTAMP}, #{createAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.shop.model.OrderDetail" >
+  <insert id="insertSelective" parameterType="com.shop.core.model.OrderDetail" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -176,7 +176,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCondition" parameterType="com.shop.model.OrderDetailCondition" resultType="java.lang.Integer" >
+  <select id="countByCondition" parameterType="com.shop.core.model.OrderDetailCondition" resultType="java.lang.Integer" >
     select count(*) from order_detail
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
@@ -232,7 +232,7 @@
       <include refid="Update_By_Condition_Where_Clause" />
     </if>
   </update>
-  <update id="updateByIdSelective" parameterType="com.shop.model.OrderDetail" >
+  <update id="updateByIdSelective" parameterType="com.shop.core.model.OrderDetail" >
     update order_detail
     <set >
       <if test="userId != null" >
@@ -262,7 +262,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateById" parameterType="com.shop.model.OrderDetail" >
+  <update id="updateById" parameterType="com.shop.core.model.OrderDetail" >
     update order_detail
     set user_id = #{userId,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=INTEGER},

@@ -109,6 +109,10 @@ public class GoodsDaoImpl implements GoodsDao {
         if (null != goods.getSellCount()) {
             condition.createCriteria().andSellCountEqualTo(goods.getSellCount());
         }
+
+        if (null != goods.getLinkPhoto()) {
+            condition.createCriteria().andLinkPhotoEqualTo(goods.getLinkPhoto());
+        }
         return condition;
     }
 }

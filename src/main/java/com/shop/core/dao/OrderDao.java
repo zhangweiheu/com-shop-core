@@ -16,7 +16,7 @@ public interface OrderDao {
 
     Order findOrderById(int Oid);
 
-    Order findOrderByUid(int Uid);
+    List<Order> findOrderByUid(int Uid);
 
     int deleteOrdersById(int Oid);
 

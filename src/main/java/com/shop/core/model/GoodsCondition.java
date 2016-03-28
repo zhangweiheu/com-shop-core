@@ -186,6 +186,76 @@ public class GoodsCondition {
             return (Criteria) this;
         }
 
+        public Criteria andLinkPhotoIsNull() {
+            addCriterion("link_photo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoIsNotNull() {
+            addCriterion("link_photo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoEqualTo(String value) {
+            addCriterion("link_photo =", value, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoNotEqualTo(String value) {
+            addCriterion("link_photo <>", value, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoGreaterThan(String value) {
+            addCriterion("link_photo >", value, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoGreaterThanOrEqualTo(String value) {
+            addCriterion("link_photo >=", value, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoLessThan(String value) {
+            addCriterion("link_photo <", value, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoLessThanOrEqualTo(String value) {
+            addCriterion("link_photo <=", value, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoLike(String value) {
+            addCriterion("link_photo like", value, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoNotLike(String value) {
+            addCriterion("link_photo not like", value, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoIn(List<String> values) {
+            addCriterion("link_photo in", values, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoNotIn(List<String> values) {
+            addCriterion("link_photo not in", values, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoBetween(String value1, String value2) {
+            addCriterion("link_photo between", value1, value2, "linkPhoto");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhotoNotBetween(String value1, String value2) {
+            addCriterion("link_photo not between", value1, value2, "linkPhoto");
+            return (Criteria) this;
+        }
+
         public Criteria andNameIsNull() {
             addCriterion("name is null");
             return (Criteria) this;

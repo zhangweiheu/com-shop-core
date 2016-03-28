@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shop.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.shop.model.User" >
+<mapper namespace="com.shop.core.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.shop.core.model.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
@@ -79,7 +79,7 @@
     id, username, password, is_admin, is_delete, integration, balance, avatar, intro, 
     email, phone, wechat, create_at, update_at
   </sql>
-  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.model.UserCondition" >
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.core.model.UserCondition" >
     select
     <if test="distinct" >
       distinct
@@ -106,13 +106,13 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByCondition" parameterType="com.shop.model.UserCondition" >
+  <delete id="deleteByCondition" parameterType="com.shop.core.model.UserCondition" >
     delete from user
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shop.model.User" >
+  <insert id="insert" parameterType="com.shop.core.model.User" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -127,7 +127,7 @@
       #{phone,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
       #{updateAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.shop.model.User" >
+  <insert id="insertSelective" parameterType="com.shop.core.model.User" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -215,7 +215,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCondition" parameterType="com.shop.model.UserCondition" resultType="java.lang.Integer" >
+  <select id="countByCondition" parameterType="com.shop.core.model.UserCondition" resultType="java.lang.Integer" >
     select count(*) from user
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
@@ -291,7 +291,7 @@
       <include refid="Update_By_Condition_Where_Clause" />
     </if>
   </update>
-  <update id="updateByIdSelective" parameterType="com.shop.model.User" >
+  <update id="updateByIdSelective" parameterType="com.shop.core.model.User" >
     update user
     <set >
       <if test="username != null" >
@@ -336,7 +336,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateById" parameterType="com.shop.model.User" >
+  <update id="updateById" parameterType="com.shop.core.model.User" >
     update user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

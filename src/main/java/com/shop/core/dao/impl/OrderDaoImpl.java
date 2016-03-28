@@ -1,9 +1,11 @@
 package com.shop.core.dao.impl;
 
 import com.shop.core.dao.OrderDao;
+import com.shop.core.mapper.OrderDetailMapper;
 import com.shop.core.mapper.OrderMapper;
 import com.shop.core.model.Order;
 import com.shop.core.model.OrderCondition;
+import com.shop.core.model.OrderDetailCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -18,6 +20,9 @@ public class OrderDaoImpl implements OrderDao {
 
     @Autowired
     OrderMapper orderMapper;
+
+    @Autowired
+    OrderDetailMapper orderDetailMapper;
 
     @Override
     public List<Order> listAllOrder(int offset, int pageSize) {
@@ -43,16 +48,19 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Order findOrderByUid(int Uid) {
+    public List<Order> findOrderByUid(int Uid) {
         Order order = new Order();
         order.setUserId(Uid);
         List<Order> list = orderMapper.selectByCondition(convertOrder2Condition(null, null, order));
-        return CollectionUtils.isEmpty(list) ? null : list.get(0);
+        return CollectionUtils.isEmpty(list) ? null : list;
     }
 
     @Override
-    public int deleteOrdersById(int Oid) {
-        return orderMapper.deleteById(Oid);
+    public int deleteOrdersById(int oid) {
+        OrderDetailCondition condition = new OrderDetailCondition();
+        condition.createCriteria().andOrderIdEqualTo(oid);
+        orderDetailMapper.deleteByCondition(condition);
+        return orderMapper.deleteById(oid);
     }
 
     @Override

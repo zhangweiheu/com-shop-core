@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shop.mapper.GoodsMapper" >
-  <resultMap id="BaseResultMap" type="com.shop.model.Goods" >
+<mapper namespace="com.shop.core.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.shop.core.model.Goods" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="link_photo" property="linkPhoto" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="remain" property="remain" jdbcType="INTEGER" />
@@ -74,10 +75,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, price, remain, sell_count, discount, status, provider_id, provider_name, 
+    id, link_photo, name, price, remain, sell_count, discount, status, provider_id, provider_name, 
     provider_phone, create_at, update_at
   </sql>
-  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.model.GoodsCondition" >
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.core.model.GoodsCondition" >
     select
     <if test="distinct" >
       distinct
@@ -104,31 +105,36 @@
     delete from goods
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByCondition" parameterType="com.shop.model.GoodsCondition" >
+  <delete id="deleteByCondition" parameterType="com.shop.core.model.GoodsCondition" >
     delete from goods
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shop.model.Goods" >
+  <insert id="insert" parameterType="com.shop.core.model.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into goods (name, price, remain, 
-      sell_count, discount, status, 
-      provider_id, provider_name, provider_phone, 
-      create_at, update_at)
-    values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{remain,jdbcType=INTEGER}, 
-      #{sellCount,jdbcType=INTEGER}, #{discount,jdbcType=DOUBLE}, #{status,jdbcType=TINYINT}, 
-      #{providerId,jdbcType=INTEGER}, #{providerName,jdbcType=VARCHAR}, #{providerPhone,jdbcType=INTEGER}, 
-      #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP})
+    insert into goods (link_photo, name, price, 
+      remain, sell_count, discount, 
+      status, provider_id, provider_name, 
+      provider_phone, create_at, update_at
+      )
+    values (#{linkPhoto,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{remain,jdbcType=INTEGER}, #{sellCount,jdbcType=INTEGER}, #{discount,jdbcType=DOUBLE}, 
+      #{status,jdbcType=TINYINT}, #{providerId,jdbcType=INTEGER}, #{providerName,jdbcType=VARCHAR}, 
+      #{providerPhone,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.shop.model.Goods" >
+  <insert id="insertSelective" parameterType="com.shop.core.model.Goods" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="linkPhoto != null" >
+        link_photo,
+      </if>
       <if test="name != null" >
         name,
       </if>
@@ -164,6 +170,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="linkPhoto != null" >
+        #{linkPhoto,jdbcType=VARCHAR},
+      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
@@ -199,7 +208,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCondition" parameterType="com.shop.model.GoodsCondition" resultType="java.lang.Integer" >
+  <select id="countByCondition" parameterType="com.shop.core.model.GoodsCondition" resultType="java.lang.Integer" >
     select count(*) from goods
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
@@ -210,6 +219,9 @@
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.linkPhoto != null" >
+        link_photo = #{record.linkPhoto,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -252,6 +264,7 @@
   <update id="updateByCondition" parameterType="map" >
     update goods
     set id = #{record.id,jdbcType=INTEGER},
+      link_photo = #{record.linkPhoto,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DOUBLE},
       remain = #{record.remain,jdbcType=INTEGER},
@@ -267,9 +280,12 @@
       <include refid="Update_By_Condition_Where_Clause" />
     </if>
   </update>
-  <update id="updateByIdSelective" parameterType="com.shop.model.Goods" >
+  <update id="updateByIdSelective" parameterType="com.shop.core.model.Goods" >
     update goods
     <set >
+      <if test="linkPhoto != null" >
+        link_photo = #{linkPhoto,jdbcType=VARCHAR},
+      </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -306,9 +322,10 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateById" parameterType="com.shop.model.Goods" >
+  <update id="updateById" parameterType="com.shop.core.model.Goods" >
     update goods
-    set name = #{name,jdbcType=VARCHAR},
+    set link_photo = #{linkPhoto,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},
       remain = #{remain,jdbcType=INTEGER},
       sell_count = #{sellCount,jdbcType=INTEGER},

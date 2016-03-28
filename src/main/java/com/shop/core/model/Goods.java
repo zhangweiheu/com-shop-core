@@ -8,12 +8,15 @@ import java.util.Date;
  * shop.goods  
  *
  * @author zhang
- * @date 2016-3-26
+ * @date 2016-3-27
  *
  */
 public class Goods implements Serializable {
     /** 主键 */
     private Integer id;
+
+    /** 商品图片 */
+    private String linkPhoto;
 
     /** 商品名称 */
     private String name;
@@ -56,6 +59,14 @@ public class Goods implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getLinkPhoto() {
+        return linkPhoto;
+    }
+
+    public void setLinkPhoto(String linkPhoto) {
+        this.linkPhoto = linkPhoto == null ? null : linkPhoto.trim();
     }
 
     public String getName() {

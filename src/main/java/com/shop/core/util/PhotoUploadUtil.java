@@ -46,7 +46,9 @@ public class PhotoUploadUtil {
     private static String generateFileName(int uid) {
         String filename = String.valueOf(uid);
         Random random = new Random();
-        filename += random.nextDouble() * uid;
+        int ran = (int)random.nextDouble() * uid;
+        filename += uid;
+        filename += ran;
         return filename;
     }
 

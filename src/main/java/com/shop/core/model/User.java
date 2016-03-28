@@ -7,7 +7,7 @@ import java.util.Date;
  * shop.user  
  *
  * @author zhang
- * @date 2016-3-26
+ * @date 2016-3-27
  *
  */
 public class User implements Serializable {

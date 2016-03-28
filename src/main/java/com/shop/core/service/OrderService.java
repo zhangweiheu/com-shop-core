@@ -10,9 +10,13 @@ import java.util.List;
  */
 
 public interface OrderService {
+    Order findOrderByOId(int oid);
+
+    List<Order> findOrderByUId(int uid);
+
     int getTotalCount();
 
-    boolean deleteOrderById(int Oid);
+    boolean deleteOrderById(int oid);
 
     int saveOrder(Order order);
 

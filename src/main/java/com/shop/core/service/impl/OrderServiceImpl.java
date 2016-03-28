@@ -17,6 +17,16 @@ public class OrderServiceImpl implements OrderService {
     OrderDao orderDao;
 
     @Override
+    public Order findOrderByOId(int oid) {
+        return orderDao.findOrderById(oid);
+    }
+
+    @Override
+    public List<Order> findOrderByUId(int uid) {
+        return orderDao.findOrderByUid(uid);
+    }
+
+    @Override
     public int getTotalCount() {
         Order order = new Order();
         return orderDao.countAllOrderByAttr(order);
