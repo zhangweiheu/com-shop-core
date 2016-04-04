@@ -3,12 +3,12 @@
 <mapper namespace="com.shop.core.mapper.OrderDetailMapper" >
   <resultMap id="BaseResultMap" type="com.shop.core.model.OrderDetail" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
     <result column="order_id" property="orderId" jdbcType="INTEGER" />
     <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="goods_count" property="goodsCount" jdbcType="VARCHAR" />
-    <result column="goods_price" property="goodsPrice" jdbcType="DECIMAL" />
-    <result column="total_price" property="totalPrice" jdbcType="INTEGER" />
+    <result column="goods_count" property="goodsCount" jdbcType="INTEGER" />
+    <result column="goods_price" property="goodsPrice" jdbcType="DOUBLE" />
+    <result column="total_price" property="totalPrice" jdbcType="DOUBLE" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -71,8 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, order_id, goods_id, goods_count, goods_price, total_price, update_at, 
-    create_at
+    id, uid, order_id, goods_id, goods_count, goods_price, total_price, update_at, create_at
   </sql>
   <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.core.model.OrderDetailCondition" >
     select
@@ -111,11 +110,11 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into order_detail (user_id, order_id, goods_id, 
+    insert into order_detail (uid, order_id, goods_id, 
       goods_count, goods_price, total_price, 
       update_at, create_at)
-    values (#{userId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
-      #{goodsCount,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DECIMAL}, #{totalPrice,jdbcType=INTEGER}, 
+    values (#{uid,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
+      #{goodsCount,jdbcType=INTEGER}, #{goodsPrice,jdbcType=DOUBLE}, #{totalPrice,jdbcType=DOUBLE}, 
       #{updateAt,jdbcType=TIMESTAMP}, #{createAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.shop.core.model.OrderDetail" >
@@ -124,8 +123,8 @@
     </selectKey>
     insert into order_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
+      <if test="uid != null" >
+        uid,
       </if>
       <if test="orderId != null" >
         order_id,
@@ -150,8 +149,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
       </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
@@ -160,13 +159,13 @@
         #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="goodsCount != null" >
-        #{goodsCount,jdbcType=VARCHAR},
+        #{goodsCount,jdbcType=INTEGER},
       </if>
       <if test="goodsPrice != null" >
-        #{goodsPrice,jdbcType=DECIMAL},
+        #{goodsPrice,jdbcType=DOUBLE},
       </if>
       <if test="totalPrice != null" >
-        #{totalPrice,jdbcType=INTEGER},
+        #{totalPrice,jdbcType=DOUBLE},
       </if>
       <if test="updateAt != null" >
         #{updateAt,jdbcType=TIMESTAMP},
@@ -188,8 +187,8 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=INTEGER},
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
       </if>
       <if test="record.orderId != null" >
         order_id = #{record.orderId,jdbcType=INTEGER},
@@ -198,13 +197,13 @@
         goods_id = #{record.goodsId,jdbcType=INTEGER},
       </if>
       <if test="record.goodsCount != null" >
-        goods_count = #{record.goodsCount,jdbcType=VARCHAR},
+        goods_count = #{record.goodsCount,jdbcType=INTEGER},
       </if>
       <if test="record.goodsPrice != null" >
-        goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
+        goods_price = #{record.goodsPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.totalPrice != null" >
-        total_price = #{record.totalPrice,jdbcType=INTEGER},
+        total_price = #{record.totalPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.updateAt != null" >
         update_at = #{record.updateAt,jdbcType=TIMESTAMP},
@@ -220,12 +219,12 @@
   <update id="updateByCondition" parameterType="map" >
     update order_detail
     set id = #{record.id,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
       order_id = #{record.orderId,jdbcType=INTEGER},
       goods_id = #{record.goodsId,jdbcType=INTEGER},
-      goods_count = #{record.goodsCount,jdbcType=VARCHAR},
-      goods_price = #{record.goodsPrice,jdbcType=DECIMAL},
-      total_price = #{record.totalPrice,jdbcType=INTEGER},
+      goods_count = #{record.goodsCount,jdbcType=INTEGER},
+      goods_price = #{record.goodsPrice,jdbcType=DOUBLE},
+      total_price = #{record.totalPrice,jdbcType=DOUBLE},
       update_at = #{record.updateAt,jdbcType=TIMESTAMP},
       create_at = #{record.createAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -235,8 +234,8 @@
   <update id="updateByIdSelective" parameterType="com.shop.core.model.OrderDetail" >
     update order_detail
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
       </if>
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=INTEGER},
@@ -245,13 +244,13 @@
         goods_id = #{goodsId,jdbcType=INTEGER},
       </if>
       <if test="goodsCount != null" >
-        goods_count = #{goodsCount,jdbcType=VARCHAR},
+        goods_count = #{goodsCount,jdbcType=INTEGER},
       </if>
       <if test="goodsPrice != null" >
-        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+        goods_price = #{goodsPrice,jdbcType=DOUBLE},
       </if>
       <if test="totalPrice != null" >
-        total_price = #{totalPrice,jdbcType=INTEGER},
+        total_price = #{totalPrice,jdbcType=DOUBLE},
       </if>
       <if test="updateAt != null" >
         update_at = #{updateAt,jdbcType=TIMESTAMP},
@@ -264,12 +263,12 @@
   </update>
   <update id="updateById" parameterType="com.shop.core.model.OrderDetail" >
     update order_detail
-    set user_id = #{userId,jdbcType=INTEGER},
+    set uid = #{uid,jdbcType=INTEGER},
       order_id = #{orderId,jdbcType=INTEGER},
       goods_id = #{goodsId,jdbcType=INTEGER},
-      goods_count = #{goodsCount,jdbcType=VARCHAR},
-      goods_price = #{goodsPrice,jdbcType=DECIMAL},
-      total_price = #{totalPrice,jdbcType=INTEGER},
+      goods_count = #{goodsCount,jdbcType=INTEGER},
+      goods_price = #{goodsPrice,jdbcType=DOUBLE},
+      total_price = #{totalPrice,jdbcType=DOUBLE},
       update_at = #{updateAt,jdbcType=TIMESTAMP},
       create_at = #{createAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

@@ -3,11 +3,11 @@
 <mapper namespace="com.shop.core.mapper.GoodsMapper" >
   <resultMap id="BaseResultMap" type="com.shop.core.model.Goods" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="link_photo" property="linkPhoto" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DOUBLE" />
     <result column="remain" property="remain" jdbcType="INTEGER" />
     <result column="sell_count" property="sellCount" jdbcType="INTEGER" />
+    <result column="link_photo" property="linkPhoto" jdbcType="VARCHAR" />
     <result column="discount" property="discount" jdbcType="DOUBLE" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="provider_id" property="providerId" jdbcType="INTEGER" />
@@ -75,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, link_photo, name, price, remain, sell_count, discount, status, provider_id, provider_name, 
+    id, name, price, remain, sell_count, link_photo, discount, status, provider_id, provider_name, 
     provider_phone, create_at, update_at
   </sql>
   <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.core.model.GoodsCondition" >
@@ -115,13 +115,13 @@
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into goods (link_photo, name, price, 
-      remain, sell_count, discount, 
+    insert into goods (name, price, remain, 
+      sell_count, link_photo, discount, 
       status, provider_id, provider_name, 
       provider_phone, create_at, update_at
       )
-    values (#{linkPhoto,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
-      #{remain,jdbcType=INTEGER}, #{sellCount,jdbcType=INTEGER}, #{discount,jdbcType=DOUBLE}, 
+    values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{remain,jdbcType=INTEGER}, 
+      #{sellCount,jdbcType=INTEGER}, #{linkPhoto,jdbcType=VARCHAR}, #{discount,jdbcType=DOUBLE}, 
       #{status,jdbcType=TINYINT}, #{providerId,jdbcType=INTEGER}, #{providerName,jdbcType=VARCHAR}, 
       #{providerPhone,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}
       )
@@ -132,9 +132,6 @@
     </selectKey>
     insert into goods
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="linkPhoto != null" >
-        link_photo,
-      </if>
       <if test="name != null" >
         name,
       </if>
@@ -146,6 +143,9 @@
       </if>
       <if test="sellCount != null" >
         sell_count,
+      </if>
+      <if test="linkPhoto != null" >
+        link_photo,
       </if>
       <if test="discount != null" >
         discount,
@@ -170,9 +170,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="linkPhoto != null" >
-        #{linkPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
@@ -184,6 +181,9 @@
       </if>
       <if test="sellCount != null" >
         #{sellCount,jdbcType=INTEGER},
+      </if>
+      <if test="linkPhoto != null" >
+        #{linkPhoto,jdbcType=VARCHAR},
       </if>
       <if test="discount != null" >
         #{discount,jdbcType=DOUBLE},
@@ -220,9 +220,6 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.linkPhoto != null" >
-        link_photo = #{record.linkPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
@@ -234,6 +231,9 @@
       </if>
       <if test="record.sellCount != null" >
         sell_count = #{record.sellCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.linkPhoto != null" >
+        link_photo = #{record.linkPhoto,jdbcType=VARCHAR},
       </if>
       <if test="record.discount != null" >
         discount = #{record.discount,jdbcType=DOUBLE},
@@ -264,11 +264,11 @@
   <update id="updateByCondition" parameterType="map" >
     update goods
     set id = #{record.id,jdbcType=INTEGER},
-      link_photo = #{record.linkPhoto,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DOUBLE},
       remain = #{record.remain,jdbcType=INTEGER},
       sell_count = #{record.sellCount,jdbcType=INTEGER},
+      link_photo = #{record.linkPhoto,jdbcType=VARCHAR},
       discount = #{record.discount,jdbcType=DOUBLE},
       status = #{record.status,jdbcType=TINYINT},
       provider_id = #{record.providerId,jdbcType=INTEGER},
@@ -283,9 +283,6 @@
   <update id="updateByIdSelective" parameterType="com.shop.core.model.Goods" >
     update goods
     <set >
-      <if test="linkPhoto != null" >
-        link_photo = #{linkPhoto,jdbcType=VARCHAR},
-      </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
@@ -297,6 +294,9 @@
       </if>
       <if test="sellCount != null" >
         sell_count = #{sellCount,jdbcType=INTEGER},
+      </if>
+      <if test="linkPhoto != null" >
+        link_photo = #{linkPhoto,jdbcType=VARCHAR},
       </if>
       <if test="discount != null" >
         discount = #{discount,jdbcType=DOUBLE},
@@ -324,11 +324,11 @@
   </update>
   <update id="updateById" parameterType="com.shop.core.model.Goods" >
     update goods
-    set link_photo = #{linkPhoto,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
+    set name = #{name,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},
       remain = #{remain,jdbcType=INTEGER},
       sell_count = #{sellCount,jdbcType=INTEGER},
+      link_photo = #{linkPhoto,jdbcType=VARCHAR},
       discount = #{discount,jdbcType=DOUBLE},
       status = #{status,jdbcType=TINYINT},
       provider_id = #{providerId,jdbcType=INTEGER},

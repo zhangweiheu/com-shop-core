@@ -53,7 +53,7 @@ public class UserDaoImpl implements UserDao {
     public int saveUser(User user) {
         user.setCreateAt(new Date());
         user.setUpdateAt(new Date());
-        return userMapper.insert(user);
+        return userMapper.insertSelective(user);
     }
 
     @Override

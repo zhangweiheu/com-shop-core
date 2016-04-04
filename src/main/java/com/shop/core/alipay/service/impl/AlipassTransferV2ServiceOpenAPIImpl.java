@@ -4,6 +4,18 @@
  */
 package com.shop.core.alipay.service.impl;
 
+import com.shop.core.alipay.utils.StringUtil;
+import com.shop.core.alipay.enums.RecognitionTypeEnum;
+import com.shop.core.alipay.enums.Result;
+import com.shop.core.alipay.model.request.BaseAddRequest;
+import com.shop.core.alipay.model.request.BaseRequest;
+import com.shop.core.alipay.model.request.instance.AddPassInstanceRequest;
+import com.shop.core.alipay.model.request.instance.UpdatePassInstanceRequest;
+import com.shop.core.alipay.model.request.template.TemplateCreateRequest;
+import com.shop.core.alipay.model.request.template.TemplateModifyRequest;
+import com.shop.core.alipay.model.result.BaseResult;
+import com.shop.core.alipay.service.AlipassTransferV2Service;
+import com.shop.core.alipay.utils.HttpResponseBuilderV2;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
@@ -16,18 +28,6 @@ import com.alipay.api.response.AlipayPassInstanceUpdateResponse;
 import com.alipay.api.response.AlipayPassTemplateAddResponse;
 import com.alipay.api.response.AlipayPassTemplateUpdateResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shop.core.alipay.enums.RecognitionTypeEnum;
-import com.shop.core.alipay.enums.Result;
-import com.shop.core.alipay.model.request.BaseAddRequest;
-import com.shop.core.alipay.model.request.BaseRequest;
-import com.shop.core.alipay.model.request.instance.AddPassInstanceRequest;
-import com.shop.core.alipay.model.request.instance.UpdatePassInstanceRequest;
-import com.shop.core.alipay.model.request.template.TemplateCreateRequest;
-import com.shop.core.alipay.model.request.template.TemplateModifyRequest;
-import com.shop.core.alipay.model.result.BaseResult;
-import com.shop.core.alipay.service.AlipassTransferV2Service;
-import com.shop.core.alipay.utils.HttpResponseBuilderV2;
-import com.shop.core.alipay.utils.StringUtil;
 
 /**
  * 走OPENAPI通道，将Alipass上送到支付宝钱包

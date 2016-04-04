@@ -1,28 +1,31 @@
 package com.shop.core.model;
 
-import com.shop.core.mybatis.enums.ExpressStatusEnum;
+import com.shop.core.mybatis.ExpressStatusEnum;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- * shop.order  
+ * shop.order_form  
  *
  * @author zhang
- * @date 2016-3-27
+ * @date 2016-4-3
  *
  */
-public class Order implements Serializable {
+public class OrderForm implements Serializable {
     /** 订单id */
     private Integer id;
 
     /** 用户id */
-    private Integer userId;
+    private Integer uid;
 
     /** 订单金额 */
     private Double orderPrice;
 
     /** 0:处理中 | 1:快递已发货 | 2:运送中 | 3:待签收 */
     private ExpressStatusEnum expressStatus;
+
+    /** 优惠码 */
+    private String serialNumber;
 
     /** 创建时间 */
     private Date createAt;
@@ -40,12 +43,12 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public Double getOrderPrice() {
@@ -62,6 +65,14 @@ public class Order implements Serializable {
 
     public void setExpressStatus(ExpressStatusEnum expressStatus) {
         this.expressStatus = expressStatus;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber == null ? null : serialNumber.trim();
     }
 
     public Date getCreateAt() {

@@ -1,7 +1,7 @@
 package com.shop.core.service.impl;
 
 import com.shop.core.dao.GoodsDao;
-import com.shop.core.mybatis.enums.GoodsStatusEnum;
+import com.shop.core.mybatis.GoodsStatusEnum;
 import com.shop.core.model.Goods;
 import com.shop.core.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +48,10 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<Goods> listAllGoods(int offset, int pageSize) {
         return goodsDao.listAllGoods(offset, pageSize);
+    }
+
+    @Override
+    public List<Goods> listAllGoodsByAttr(int offset, int pageSize, Goods goods) {
+        return goodsDao.listGoodsByAttr(offset, pageSize, goods);
     }
 }

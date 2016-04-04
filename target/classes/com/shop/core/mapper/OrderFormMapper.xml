@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shop.core.mapper.PassMapper" >
-  <resultMap id="BaseResultMap" type="com.shop.core.model.Pass" >
+<mapper namespace="com.shop.core.mapper.OrderFormMapper" >
+  <resultMap id="BaseResultMap" type="com.shop.core.model.OrderForm" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="serial_number" property="serialNumber" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="BIT" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="order_price" property="orderPrice" jdbcType="DOUBLE" />
+    <result column="express_status" property="expressStatus" jdbcType="TINYINT" />
+    <result column="serial_number" property="serialNumber" jdbcType="VARCHAR" />
     <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
     <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -67,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, serial_number, status, create_at, update_at
+    id, uid, order_price, express_status, serial_number, create_at, update_at
   </sql>
-  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.core.model.PassCondition" >
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.shop.core.model.OrderFormCondition" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from pass
+    from order_form
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
     </if>
@@ -89,39 +91,47 @@
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from pass
+    from order_form
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer" >
-    delete from pass
+    delete from order_form
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByCondition" parameterType="com.shop.core.model.PassCondition" >
-    delete from pass
+  <delete id="deleteByCondition" parameterType="com.shop.core.model.OrderFormCondition" >
+    delete from order_form
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.shop.core.model.Pass" >
+  <insert id="insert" parameterType="com.shop.core.model.OrderForm" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pass (serial_number, status, create_at, 
-      update_at)
-    values (#{serialNumber,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{createAt,jdbcType=TIMESTAMP}, 
-      #{updateAt,jdbcType=TIMESTAMP})
+    insert into order_form (uid, order_price, express_status, 
+      serial_number, create_at, update_at
+      )
+    values (#{uid,jdbcType=INTEGER}, #{orderPrice,jdbcType=DOUBLE}, #{expressStatus,jdbcType=TINYINT}, 
+      #{serialNumber,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.shop.core.model.Pass" >
+  <insert id="insertSelective" parameterType="com.shop.core.model.OrderForm" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pass
+    insert into order_form
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="orderPrice != null" >
+        order_price,
+      </if>
+      <if test="expressStatus != null" >
+        express_status,
+      </if>
       <if test="serialNumber != null" >
         serial_number,
-      </if>
-      <if test="status != null" >
-        status,
       </if>
       <if test="createAt != null" >
         create_at,
@@ -131,11 +141,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="serialNumber != null" >
-        #{serialNumber,jdbcType=INTEGER},
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=BIT},
+      <if test="orderPrice != null" >
+        #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="expressStatus != null" >
+        #{expressStatus,jdbcType=TINYINT},
+      </if>
+      <if test="serialNumber != null" >
+        #{serialNumber,jdbcType=VARCHAR},
       </if>
       <if test="createAt != null" >
         #{createAt,jdbcType=TIMESTAMP},
@@ -145,23 +161,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCondition" parameterType="com.shop.core.model.PassCondition" resultType="java.lang.Integer" >
-    select count(*) from pass
+  <select id="countByCondition" parameterType="com.shop.core.model.OrderFormCondition" resultType="java.lang.Integer" >
+    select count(*) from order_form
     <if test="_parameter != null" >
       <include refid="Condition_Where_Clause" />
     </if>
   </select>
   <update id="updateByConditionSelective" parameterType="map" >
-    update pass
+    update order_form
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.serialNumber != null" >
-        serial_number = #{record.serialNumber,jdbcType=INTEGER},
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=BIT},
+      <if test="record.orderPrice != null" >
+        order_price = #{record.orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.expressStatus != null" >
+        express_status = #{record.expressStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.serialNumber != null" >
+        serial_number = #{record.serialNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.createAt != null" >
         create_at = #{record.createAt,jdbcType=TIMESTAMP},
@@ -175,24 +197,32 @@
     </if>
   </update>
   <update id="updateByCondition" parameterType="map" >
-    update pass
+    update order_form
     set id = #{record.id,jdbcType=INTEGER},
-      serial_number = #{record.serialNumber,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=BIT},
+      uid = #{record.uid,jdbcType=INTEGER},
+      order_price = #{record.orderPrice,jdbcType=DOUBLE},
+      express_status = #{record.expressStatus,jdbcType=TINYINT},
+      serial_number = #{record.serialNumber,jdbcType=VARCHAR},
       create_at = #{record.createAt,jdbcType=TIMESTAMP},
       update_at = #{record.updateAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Condition_Where_Clause" />
     </if>
   </update>
-  <update id="updateByIdSelective" parameterType="com.shop.core.model.Pass" >
-    update pass
+  <update id="updateByIdSelective" parameterType="com.shop.core.model.OrderForm" >
+    update order_form
     <set >
-      <if test="serialNumber != null" >
-        serial_number = #{serialNumber,jdbcType=INTEGER},
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=BIT},
+      <if test="orderPrice != null" >
+        order_price = #{orderPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="expressStatus != null" >
+        express_status = #{expressStatus,jdbcType=TINYINT},
+      </if>
+      <if test="serialNumber != null" >
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
       </if>
       <if test="createAt != null" >
         create_at = #{createAt,jdbcType=TIMESTAMP},
@@ -203,10 +233,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateById" parameterType="com.shop.core.model.Pass" >
-    update pass
-    set serial_number = #{serialNumber,jdbcType=INTEGER},
-      status = #{status,jdbcType=BIT},
+  <update id="updateById" parameterType="com.shop.core.model.OrderForm" >
+    update order_form
+    set uid = #{uid,jdbcType=INTEGER},
+      order_price = #{orderPrice,jdbcType=DOUBLE},
+      express_status = #{expressStatus,jdbcType=TINYINT},
+      serial_number = #{serialNumber,jdbcType=VARCHAR},
       create_at = #{createAt,jdbcType=TIMESTAMP},
       update_at = #{updateAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

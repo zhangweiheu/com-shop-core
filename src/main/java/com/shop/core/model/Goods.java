@@ -1,6 +1,6 @@
 package com.shop.core.model;
 
-import com.shop.core.mybatis.enums.GoodsStatusEnum;
+import com.shop.core.mybatis.GoodsStatusEnum;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,15 +8,12 @@ import java.util.Date;
  * shop.goods  
  *
  * @author zhang
- * @date 2016-3-27
+ * @date 2016-4-3
  *
  */
 public class Goods implements Serializable {
     /** 主键 */
     private Integer id;
-
-    /** 商品图片 */
-    private String linkPhoto;
 
     /** 商品名称 */
     private String name;
@@ -29,6 +26,9 @@ public class Goods implements Serializable {
 
     /** 销售量 */
     private Integer sellCount;
+
+    /** 商品图片 */
+    private String linkPhoto;
 
     /** 打折 */
     private Double discount;
@@ -61,14 +61,6 @@ public class Goods implements Serializable {
         this.id = id;
     }
 
-    public String getLinkPhoto() {
-        return linkPhoto;
-    }
-
-    public void setLinkPhoto(String linkPhoto) {
-        this.linkPhoto = linkPhoto == null ? null : linkPhoto.trim();
-    }
-
     public String getName() {
         return name;
     }
@@ -99,6 +91,14 @@ public class Goods implements Serializable {
 
     public void setSellCount(Integer sellCount) {
         this.sellCount = sellCount;
+    }
+
+    public String getLinkPhoto() {
+        return linkPhoto;
+    }
+
+    public void setLinkPhoto(String linkPhoto) {
+        this.linkPhoto = linkPhoto == null ? null : linkPhoto.trim();
     }
 
     public Double getDiscount() {

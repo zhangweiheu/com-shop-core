@@ -7,7 +7,7 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="is_admin" property="isAdmin" jdbcType="BIT" />
     <result column="is_delete" property="isDelete" jdbcType="BIT" />
-    <result column="integration" property="integration" jdbcType="INTEGER" />
+    <result column="integration" property="integration" jdbcType="DOUBLE" />
     <result column="balance" property="balance" jdbcType="INTEGER" />
     <result column="avatar" property="avatar" jdbcType="VARCHAR" />
     <result column="intro" property="intro" jdbcType="VARCHAR" />
@@ -122,7 +122,7 @@
       phone, wechat, create_at, 
       update_at)
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{isAdmin,jdbcType=BIT}, 
-      #{isDelete,jdbcType=BIT}, #{integration,jdbcType=INTEGER}, #{balance,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=BIT}, #{integration,jdbcType=DOUBLE}, #{balance,jdbcType=INTEGER}, 
       #{avatar,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
       #{updateAt,jdbcType=TIMESTAMP})
@@ -187,7 +187,7 @@
         #{isDelete,jdbcType=BIT},
       </if>
       <if test="integration != null" >
-        #{integration,jdbcType=INTEGER},
+        #{integration,jdbcType=DOUBLE},
       </if>
       <if test="balance != null" >
         #{balance,jdbcType=INTEGER},
@@ -240,7 +240,7 @@
         is_delete = #{record.isDelete,jdbcType=BIT},
       </if>
       <if test="record.integration != null" >
-        integration = #{record.integration,jdbcType=INTEGER},
+        integration = #{record.integration,jdbcType=DOUBLE},
       </if>
       <if test="record.balance != null" >
         balance = #{record.balance,jdbcType=INTEGER},
@@ -278,7 +278,7 @@
       password = #{record.password,jdbcType=VARCHAR},
       is_admin = #{record.isAdmin,jdbcType=BIT},
       is_delete = #{record.isDelete,jdbcType=BIT},
-      integration = #{record.integration,jdbcType=INTEGER},
+      integration = #{record.integration,jdbcType=DOUBLE},
       balance = #{record.balance,jdbcType=INTEGER},
       avatar = #{record.avatar,jdbcType=VARCHAR},
       intro = #{record.intro,jdbcType=VARCHAR},
@@ -307,7 +307,7 @@
         is_delete = #{isDelete,jdbcType=BIT},
       </if>
       <if test="integration != null" >
-        integration = #{integration,jdbcType=INTEGER},
+        integration = #{integration,jdbcType=DOUBLE},
       </if>
       <if test="balance != null" >
         balance = #{balance,jdbcType=INTEGER},
@@ -342,7 +342,7 @@
       password = #{password,jdbcType=VARCHAR},
       is_admin = #{isAdmin,jdbcType=BIT},
       is_delete = #{isDelete,jdbcType=BIT},
-      integration = #{integration,jdbcType=INTEGER},
+      integration = #{integration,jdbcType=DOUBLE},
       balance = #{balance,jdbcType=INTEGER},
       avatar = #{avatar,jdbcType=VARCHAR},
       intro = #{intro,jdbcType=VARCHAR},

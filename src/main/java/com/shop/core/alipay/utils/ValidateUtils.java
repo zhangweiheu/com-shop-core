@@ -4,15 +4,22 @@
  */
 package com.shop.core.alipay.utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import com.shop.core.alipay.enums.OperationFormatType;
 import com.shop.core.alipay.enums.PicName;
 import com.shop.core.alipay.enums.Result;
-import com.shop.core.alipay.model.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import com.shop.core.alipay.model.AlipassModel;
+import com.shop.core.alipay.model.EInfoModel;
+import com.shop.core.alipay.model.EInfoUnitModel;
+import com.shop.core.alipay.model.EVoucherInfoModel;
+import com.shop.core.alipay.model.FileInfoModel;
+import com.shop.core.alipay.model.MerchantModel;
+import com.shop.core.alipay.model.OperationModel;
+import com.shop.core.alipay.model.PlatformModel;
+import com.shop.core.alipay.model.ResponseModel;
 
 public final class ValidateUtils {
 
@@ -114,6 +121,7 @@ public final class ValidateUtils {
      * 渠道必需属性是否存在 及部分数据的长度检查
      * @param platform
      * @param validateResult
+     * @param objects 
      * @return
      */
     private static Result platformValidate(PlatformModel platform, Result validateResult) {
@@ -152,6 +160,7 @@ public final class ValidateUtils {
      * 判断给定的图片文件 在 map中是否存在
      * @param picMap
      * @param validateResult 
+     * @param objects 
      * @return
      */
     private static Result picFileValidate(HashMap<PicName, byte[]> picMap, PicName picName,
@@ -166,7 +175,7 @@ public final class ValidateUtils {
 
     /**
      * 判断基础属性中必传值是否有值 及部分数据的长度检查
-     * @param alipassModel
+     * @param evoucherInfo
      * @param validateResult 
      * @return
      */
@@ -240,7 +249,7 @@ public final class ValidateUtils {
 
     /**
      * 校验Operation数据
-     * @param alipassModel
+     * @param evoucherInfo
      * @param validateResult
      * @return
      */

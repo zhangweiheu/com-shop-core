@@ -8,7 +8,6 @@
  */
 package com.shop.core.alipay.model;
 
-
 import com.shop.core.alipay.enums.Result;
 
 /**
@@ -21,7 +20,7 @@ public class ResponseModel extends BaseModel {
     private static final long serialVersionUID = 1833091869186717756L;
 
     /**生成alipass的结果*/
-    private Result result;
+    private Result            result;
 
     /**Base64之后的alipass文件*/
     private String            alipass;

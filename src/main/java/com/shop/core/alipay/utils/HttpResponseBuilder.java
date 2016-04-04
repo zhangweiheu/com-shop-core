@@ -4,9 +4,9 @@
  */
 package com.shop.core.alipay.utils;
 
+import com.shop.core.alipay.model.result.BaseResult;
 import com.alipay.api.AlipayRequest;
 import com.alipay.api.AlipayResponse;
-import com.shop.core.alipay.model.result.BaseResult;
 
 /**
  * Http请求错误码构建工具

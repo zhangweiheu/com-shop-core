@@ -4,13 +4,22 @@
  */
 package com.shop.core.alipay.utils;
 
-
+import com.shop.core.alipay.codec.Base64;
 import com.shop.core.alipay.enums.FileName;
 import com.shop.core.alipay.enums.Result;
 import com.shop.core.alipay.model.AlipassModel;
-import com.shop.core.alipay.codec.Base64;
-import java.io.*;
-import java.util.*;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedOutputStream;
 import java.util.zip.ZipEntry;
@@ -22,7 +31,7 @@ public final class FileGenerateUtils {
      * 将alipass文件进行Base64编码
      * 
      * @param alipassFilePath
-     * @param tempPath
+     * @param alipassFilePath2 
      * @param alipassresult
      * @return
      */

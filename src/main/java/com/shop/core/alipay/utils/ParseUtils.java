@@ -4,13 +4,12 @@
  */
 package com.shop.core.alipay.utils;
 
-
-import com.shop.core.alipay.parser.Parser;
-
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
+
+import com.shop.core.alipay.parser.Parser;
 
 /**
  * alipass模板解析工具类

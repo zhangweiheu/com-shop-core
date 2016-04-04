@@ -1,7 +1,7 @@
 package com.shop.core.service.impl;
 
 import com.shop.core.dao.OrderDao;
-import com.shop.core.model.Order;
+import com.shop.core.model.OrderForm;
 import com.shop.core.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,18 +17,23 @@ public class OrderServiceImpl implements OrderService {
     OrderDao orderDao;
 
     @Override
-    public Order findOrderByOId(int oid) {
+    public OrderForm findOrderByOId(int oid) {
         return orderDao.findOrderById(oid);
     }
 
     @Override
-    public List<Order> findOrderByUId(int uid) {
+    public List<OrderForm> findOrderByUId(int uid) {
         return orderDao.findOrderByUid(uid);
     }
 
     @Override
     public int getTotalCount() {
-        Order order = new Order();
+        OrderForm order = new OrderForm();
+        return orderDao.countAllOrderByAttr(order);
+    }
+
+    @Override
+    public int getTotalCountByAttr(OrderForm order) {
         return orderDao.countAllOrderByAttr(order);
     }
 
@@ -38,17 +43,22 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public int saveOrder(Order order) {
+    public int saveOrder(OrderForm order) {
         return orderDao.saveOrder(order);
     }
 
     @Override
-    public int updateOrder(Order order) {
+    public int updateOrder(OrderForm order) {
         return orderDao.updateOrder(order);
     }
 
     @Override
-    public List<Order> listAllOrder(int offset, int pageSize) {
+    public List<OrderForm> listAllOrder(int offset, int pageSize) {
         return orderDao.listAllOrder(offset, pageSize);
+    }
+
+    @Override
+    public List<OrderForm> listAllOrderByAttr(int offset, int pageSize, OrderForm order) {
+        return orderDao.listOrdersByAttr(offset, pageSize, order);
     }
 }

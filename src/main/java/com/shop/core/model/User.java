@@ -7,7 +7,7 @@ import java.util.Date;
  * shop.user  
  *
  * @author zhang
- * @date 2016-3-27
+ * @date 2016-4-3
  *
  */
 public class User implements Serializable {
@@ -27,7 +27,7 @@ public class User implements Serializable {
     private Boolean isDelete;
 
     /** 积分 */
-    private Integer integration;
+    private Double integration;
 
     /** 余额 */
     private Integer balance;
@@ -95,11 +95,11 @@ public class User implements Serializable {
         this.isDelete = isDelete;
     }
 
-    public Integer getIntegration() {
+    public Double getIntegration() {
         return integration;
     }
 
-    public void setIntegration(Integer integration) {
+    public void setIntegration(Double integration) {
         this.integration = integration;
     }
 

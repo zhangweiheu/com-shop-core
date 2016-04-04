@@ -21,4 +21,6 @@ public interface GoodsService {
     int updateGoods(Goods goods);
 
     List<Goods> listAllGoods(int offset, int pageSize);
+
+    List<Goods> listAllGoodsByAttr(int offset, int pageSize, Goods goods);
 }

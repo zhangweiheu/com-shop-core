@@ -4,10 +4,9 @@
  */
 package com.shop.core.alipay.model.result;
 
+import java.io.Serializable;
 
 import com.shop.core.alipay.enums.Result;
-
-import java.io.Serializable;
 
 /**
  * 检验结果对象

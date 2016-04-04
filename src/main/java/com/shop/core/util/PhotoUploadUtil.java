@@ -4,6 +4,8 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.shop.core.exception.BusinessExceptionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import java.util.Random;
  * Created by zhang on 2016/3/23.
  */
 public class PhotoUploadUtil {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PhotoUploadUtil.class);
+
     private static final String SECRET_KEY = "oq0F_m3TP1pXeKTuVUbC25fArMmGHwN9Z-I0Vzx0";
     private static final String ACCESS_KEY = "72bv1OHYgn4I8drbTFOr8e4-lv3Hu329VLnv8c6X";
     private static final String BUCKET_NAME = "space";
@@ -38,7 +42,7 @@ public class PhotoUploadUtil {
                 BusinessExceptionUtil.throwBusinessException("上传失败" + e.getMessage());
             }
         } else {
-            BusinessExceptionUtil.throwBusinessException("图片不存在");
+            LOGGER.warn("图片不存在");
         }
         return DOMAIN + fileName;
     }
@@ -46,7 +50,7 @@ public class PhotoUploadUtil {
     private static String generateFileName(int uid) {
         String filename = String.valueOf(uid);
         Random random = new Random();
-        int ran = (int)random.nextDouble() * uid;
+        int ran = (int) (random.nextDouble() * uid * 100);
         filename += uid;
         filename += ran;
         return filename;

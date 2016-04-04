@@ -4,11 +4,10 @@
  */
 package com.shop.core.alipay.model.request.instance;
 
-
-import com.shop.core.alipay.model.request.BaseAddRequest;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import com.shop.core.alipay.model.request.BaseAddRequest;
 
 /**
  * 模版方式添加卡券的请求入参对象

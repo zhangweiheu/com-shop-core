@@ -4,10 +4,10 @@
  */
 package com.shop.core.alipay.model;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
-import java.util.Map;
 
 /**
  * Pass特性 EInfo的最小单元，用于组合成复杂的EInfo对象

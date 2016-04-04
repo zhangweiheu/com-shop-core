@@ -4,12 +4,11 @@
  */
 package com.shop.core.alipay.model.request.instance;
 
+import java.util.HashMap;
+import java.util.Map;
 
 import com.shop.core.alipay.enums.PassStatus;
 import com.shop.core.alipay.model.request.BaseRequest;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 通过模版更新卡券内容的请求参数对象
@@ -32,7 +31,7 @@ public class UpdatePassInstanceRequest extends BaseRequest {
     private String              channelId;
 
     /**  pass状态*/
-    private PassStatus status;
+    private PassStatus          status;
 
     /**  当status为USED时：*/
     private String              verifyCode;

@@ -4,12 +4,12 @@
  */
 package com.shop.core.alipay.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import java.util.List;
+
 import com.shop.core.alipay.enums.PassType;
 import com.shop.core.alipay.enums.ProductType;
-
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * 基础属性Model
@@ -28,10 +28,10 @@ public class EVoucherInfoModel extends BaseModel {
     private String               title;
 
     /**pass类型*/
-    private PassType type;
+    private PassType             type;
 
     /**pass子类型*/
-    private ProductType product;
+    private ProductType          product;
 
     /**pass生效时间*/
     private String               startDate;

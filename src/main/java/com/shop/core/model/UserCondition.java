@@ -455,52 +455,52 @@ public class UserCondition {
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationEqualTo(Integer value) {
+        public Criteria andIntegrationEqualTo(Double value) {
             addCriterion("integration =", value, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationNotEqualTo(Integer value) {
+        public Criteria andIntegrationNotEqualTo(Double value) {
             addCriterion("integration <>", value, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationGreaterThan(Integer value) {
+        public Criteria andIntegrationGreaterThan(Double value) {
             addCriterion("integration >", value, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIntegrationGreaterThanOrEqualTo(Double value) {
             addCriterion("integration >=", value, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationLessThan(Integer value) {
+        public Criteria andIntegrationLessThan(Double value) {
             addCriterion("integration <", value, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationLessThanOrEqualTo(Integer value) {
+        public Criteria andIntegrationLessThanOrEqualTo(Double value) {
             addCriterion("integration <=", value, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationIn(List<Integer> values) {
+        public Criteria andIntegrationIn(List<Double> values) {
             addCriterion("integration in", values, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationNotIn(List<Integer> values) {
+        public Criteria andIntegrationNotIn(List<Double> values) {
             addCriterion("integration not in", values, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationBetween(Integer value1, Integer value2) {
+        public Criteria andIntegrationBetween(Double value1, Double value2) {
             addCriterion("integration between", value1, value2, "integration");
             return (Criteria) this;
         }
 
-        public Criteria andIntegrationNotBetween(Integer value1, Integer value2) {
+        public Criteria andIntegrationNotBetween(Double value1, Double value2) {
             addCriterion("integration not between", value1, value2, "integration");
             return (Criteria) this;
         }

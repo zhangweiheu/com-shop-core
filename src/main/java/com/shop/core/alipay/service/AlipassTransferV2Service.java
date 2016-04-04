@@ -4,15 +4,15 @@
  */
 package com.shop.core.alipay.service;
 
+import com.shop.core.alipay.model.request.instance.AddPassInstanceRequest;
+import com.shop.core.alipay.model.request.instance.UpdatePassInstanceRequest;
+import com.shop.core.alipay.model.request.template.TemplateCreateRequest;
+import com.shop.core.alipay.model.request.template.TemplateModifyRequest;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.response.AlipayPassInstanceAddResponse;
 import com.alipay.api.response.AlipayPassInstanceUpdateResponse;
 import com.alipay.api.response.AlipayPassTemplateAddResponse;
 import com.alipay.api.response.AlipayPassTemplateUpdateResponse;
-import com.shop.core.alipay.model.request.instance.AddPassInstanceRequest;
-import com.shop.core.alipay.model.request.instance.UpdatePassInstanceRequest;
-import com.shop.core.alipay.model.request.template.TemplateCreateRequest;
-import com.shop.core.alipay.model.request.template.TemplateModifyRequest;
 
 /**
  * 通过OPENAPI方式向Alipay服务器发送alipass相关数据，完成模版及卡券的添加和更新等操作
@@ -36,8 +36,10 @@ public interface AlipassTransferV2Service {
     * @param apiUrl    非空
     * @param appId     非空
     * @param appKey    非空
+    * @param formatType 非空
     */
-    public void init(String apiUrl, String appId, String appKey, String format, String charset, String alipayPublicKey);
+    public void init(String apiUrl, String appId, String appKey, String format, String charset,
+                     String alipayPublicKey);
 
     /**
      * 创建Alipass模版接口-json字串方式

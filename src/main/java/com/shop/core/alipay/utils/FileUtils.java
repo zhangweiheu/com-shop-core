@@ -1,13 +1,29 @@
 package com.shop.core.alipay.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shop.core.alipay.enums.Constants;
-import com.shop.core.alipay.codec.Base64;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.MessageDigest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.shop.core.alipay.codec.Base64;
+import com.shop.core.alipay.enums.Constants;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public final class FileUtils {
 
@@ -57,7 +73,7 @@ public final class FileUtils {
         String hs = "";
         String stmp = "";
         for (int n = 0; n < b.length; n++) {
-            stmp = (Integer.toHexString(b[n] & 0XFF));
+            stmp = (java.lang.Integer.toHexString(b[n] & 0XFF));
             if (stmp.length() == 1) {
                 hs = hs + "0" + stmp;
             } else {
@@ -333,7 +349,7 @@ public final class FileUtils {
     /**
      * 获取系统下文件的绝对路径
      * 
-     * @param relativePath
+     * @param packageName
      * @return
      */
     public static String getAbsolutePath(String relativePath) {

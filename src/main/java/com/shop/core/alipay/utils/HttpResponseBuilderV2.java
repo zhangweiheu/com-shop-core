@@ -4,13 +4,13 @@
  */
 package com.shop.core.alipay.utils;
 
+import com.shop.core.alipay.model.result.BaseResult;
 import com.alipay.api.AlipayRequest;
 import com.alipay.api.AlipayResponse;
 import com.alipay.api.response.AlipayPassInstanceAddResponse;
 import com.alipay.api.response.AlipayPassInstanceUpdateResponse;
 import com.alipay.api.response.AlipayPassTemplateAddResponse;
 import com.alipay.api.response.AlipayPassTemplateUpdateResponse;
-import com.shop.core.alipay.model.result.BaseResult;
 
 /**
  * Http请求错误码构建工具

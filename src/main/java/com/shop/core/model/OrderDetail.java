@@ -1,14 +1,13 @@
 package com.shop.core.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * shop.order_detail  
  *
  * @author zhang
- * @date 2016-3-27
+ * @date 2016-4-3
  *
  */
 public class OrderDetail implements Serializable {
@@ -16,7 +15,7 @@ public class OrderDetail implements Serializable {
     private Integer id;
 
     /** 用户id:购物车时才有值 */
-    private Integer userId;
+    private Integer uid;
 
     /** 关联订单id */
     private Integer orderId;
@@ -25,13 +24,13 @@ public class OrderDetail implements Serializable {
     private Integer goodsId;
 
     /** 商品数量 */
-    private String goodsCount;
+    private Integer goodsCount;
 
     /** 商品价格 */
-    private BigDecimal goodsPrice;
+    private Double goodsPrice;
 
     /** 本单总价 */
-    private Integer totalPrice;
+    private Double totalPrice;
 
     /** 更新时间 */
     private Date updateAt;
@@ -49,12 +48,12 @@ public class OrderDetail implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public Integer getOrderId() {
@@ -73,27 +72,27 @@ public class OrderDetail implements Serializable {
         this.goodsId = goodsId;
     }
 
-    public String getGoodsCount() {
+    public Integer getGoodsCount() {
         return goodsCount;
     }
 
-    public void setGoodsCount(String goodsCount) {
-        this.goodsCount = goodsCount == null ? null : goodsCount.trim();
+    public void setGoodsCount(Integer goodsCount) {
+        this.goodsCount = goodsCount;
     }
 
-    public BigDecimal getGoodsPrice() {
+    public Double getGoodsPrice() {
         return goodsPrice;
     }
 
-    public void setGoodsPrice(BigDecimal goodsPrice) {
+    public void setGoodsPrice(Double goodsPrice) {
         this.goodsPrice = goodsPrice;
     }
 
-    public Integer getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

@@ -1,7 +1,7 @@
 package com.shop.core.dao.impl;
 
 import com.shop.core.dao.GoodsDao;
-import com.shop.core.mybatis.enums.GoodsStatusEnum;
+import com.shop.core.mybatis.GoodsStatusEnum;
 import com.shop.core.mapper.GoodsMapper;
 import com.shop.core.model.Goods;
 import com.shop.core.model.GoodsCondition;
@@ -46,17 +46,17 @@ public class GoodsDaoImpl implements GoodsDao {
         Goods goods = new Goods();
         goods.setId(Gid);
         goods.setStatus(GoodsStatusEnum.REMOVE_SUPPORT);
-        return goodsMapper.updateById(goods);
+        return goodsMapper.updateByIdSelective(goods);
     }
 
     @Override
     public int updateGoods(Goods goods) {
-        return goodsMapper.updateById(goods);
+        return goodsMapper.updateByIdSelective(goods);
     }
 
     @Override
     public int saveGoods(Goods goods) {
-        return goodsMapper.insert(goods);
+        return goodsMapper.insertSelective(goods);
     }
 
     private GoodsCondition convertGoodsAttr2Condition(Integer offset, Integer pageSize, Goods goods) {
@@ -74,45 +74,48 @@ public class GoodsDaoImpl implements GoodsDao {
             return condition;
         }
 
+        GoodsCondition.Criteria criteria = condition.createCriteria();
+
         if (null != goods.getId()) {
-            condition.createCriteria().andIdEqualTo(goods.getId());
+            criteria.andIdEqualTo(goods.getId());
         }
 
         if (null != goods.getName()) {
-            condition.createCriteria().andNameEqualTo(goods.getName());
+            criteria.andNameEqualTo(goods.getName());
         }
 
         if (null != goods.getPrice()) {
-            condition.createCriteria().andPriceEqualTo(goods.getPrice());
+            criteria.andPriceEqualTo(goods.getPrice());
         }
 
         if (null != goods.getProviderId()) {
-            condition.createCriteria().andProviderIdEqualTo(goods.getProviderId());
+            criteria.andProviderIdEqualTo(goods.getProviderId());
         }
 
         if (null != goods.getProviderPhone()) {
-            condition.createCriteria().andProviderPhoneEqualTo(goods.getProviderPhone());
+            criteria.andProviderPhoneEqualTo(goods.getProviderPhone());
         }
 
         if (null != goods.getProviderName()) {
-            condition.createCriteria().andProviderNameEqualTo(goods.getProviderName());
+            criteria.andProviderNameEqualTo(goods.getProviderName());
         }
 
         if (null != goods.getRemain()) {
-            condition.createCriteria().andRemainEqualTo(goods.getRemain());
+            criteria.andRemainEqualTo(goods.getRemain());
         }
 
         if (null != goods.getStatus()) {
-            condition.createCriteria().andStatusEqualTo(goods.getStatus());
+            criteria.andStatusEqualTo(goods.getStatus());
         }
 
         if (null != goods.getSellCount()) {
-            condition.createCriteria().andSellCountEqualTo(goods.getSellCount());
+            criteria.andSellCountEqualTo(goods.getSellCount());
         }
 
         if (null != goods.getLinkPhoto()) {
-            condition.createCriteria().andLinkPhotoEqualTo(goods.getLinkPhoto());
+            criteria.andLinkPhotoEqualTo(goods.getLinkPhoto());
         }
+        condition.or(criteria);
         return condition;
     }
 }

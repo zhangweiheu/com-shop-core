@@ -50,7 +50,7 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
 
     @Override
     public int saveOrderDetail(OrderDetail orderDetail) {
-        return orderDetailMapper.insert(orderDetail);
+        return orderDetailMapper.insertSelective(orderDetail);
     }
 
 
@@ -73,9 +73,6 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
             condition.createCriteria().andIdEqualTo(orderDetail.getId());
         }
 
-        if (null != orderDetail.getGoodsCount()) {
-            condition.createCriteria().andGoodsCountEqualTo(orderDetail.getGoodsCount());
-        }
 
         if (null != orderDetail.getGoodsId()) {
             condition.createCriteria().andGoodsIdEqualTo(orderDetail.getGoodsId());
@@ -85,12 +82,8 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
             condition.createCriteria().andOrderIdEqualTo(orderDetail.getOrderId());
         }
 
-        if (null != orderDetail.getGoodsPrice()) {
-            condition.createCriteria().andGoodsPriceEqualTo(orderDetail.getGoodsPrice());
-        }
-
-        if (null != orderDetail.getUserId()) {
-            condition.createCriteria().andUserIdEqualTo(orderDetail.getUserId());
+        if (null != orderDetail.getUid()) {
+            condition.createCriteria().andUidEqualTo(orderDetail.getUid());
         }
         return condition;
     }

@@ -79,7 +79,7 @@ public class StringUtils {
      * @param string
      *            the String to encode, may be {@code null}
      * @param charsetName
-     *            The name of a required {@link Charset}
+     *            The name of a required {@link java.nio.charset.Charset}
      * @return encoded bytes, or {@code null} if the input string was {@code null}
      * @throws IllegalStateException
      *             Thrown when a {@link UnsupportedEncodingException} is caught, which should never happen for a
@@ -220,7 +220,7 @@ public class StringUtils {
      * @param bytes
      *            The bytes to be decoded into characters, may be {@code null}
      * @param charsetName
-     *            The name of a required {@link Charset}
+     *            The name of a required {@link java.nio.charset.Charset}
      * @return A new <code>String</code> decoded from the specified array of bytes using the given charset,
      *         or {@code null} if the input byte array was {@code null}.
      * @throws IllegalStateException

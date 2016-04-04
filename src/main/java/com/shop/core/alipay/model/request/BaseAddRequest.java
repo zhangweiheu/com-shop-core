@@ -4,10 +4,9 @@
  */
 package com.shop.core.alipay.model.request;
 
+import java.util.Map;
 
 import com.shop.core.alipay.enums.RecognitionTypeEnum;
-
-import java.util.Map;
 
 /**
  * 卡券添加的请求参数基类

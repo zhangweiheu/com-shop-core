@@ -4,11 +4,11 @@
  */
 package com.shop.core.alipay.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.List;
 
 /**
  * 操作属性Model

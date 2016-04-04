@@ -10,6 +10,8 @@ import java.util.List;
  */
 
 public interface CartService {
+    OrderDetail findOrderDetailByAttr(OrderDetail orderDetail);
+
     int getTotalCountByUid(int uid);
 
     int deleteCartByODid(int ODid);
@@ -18,5 +20,5 @@ public interface CartService {
 
     int updateCart(OrderDetail orderDetail);
 
-    List<OrderDetail> listUserAllCart(int offset, int pageSize,int uid);
+    List<OrderDetail> listUserAllCart(int offset, int pageSize, int uid);
 }

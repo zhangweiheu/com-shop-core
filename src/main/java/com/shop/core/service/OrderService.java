@@ -1,7 +1,7 @@
 package com.shop.core.service;
 
 
-import com.shop.core.model.Order;
+import com.shop.core.model.OrderForm;
 
 import java.util.List;
 
@@ -10,17 +10,21 @@ import java.util.List;
  */
 
 public interface OrderService {
-    Order findOrderByOId(int oid);
+    OrderForm findOrderByOId(int oid);
 
-    List<Order> findOrderByUId(int uid);
+    List<OrderForm> findOrderByUId(int uid);
 
     int getTotalCount();
 
+    int getTotalCountByAttr(OrderForm order);
+
     boolean deleteOrderById(int oid);
 
-    int saveOrder(Order order);
+    int saveOrder(OrderForm order);
 
-    int updateOrder(Order order);
+    int updateOrder(OrderForm order);
 
-    List<Order> listAllOrder(int offset, int pageSize);
+    List<OrderForm> listAllOrder(int offset, int pageSize);
+
+    List<OrderForm> listAllOrderByAttr(int offset, int pageSize, OrderForm order);
 }

@@ -8,7 +8,6 @@
  */
 package com.shop.core.alipay.enums;
 
-
 import com.shop.core.alipay.utils.StringUtil;
 
 /**

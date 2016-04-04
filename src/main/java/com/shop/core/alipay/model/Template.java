@@ -4,10 +4,10 @@
  */
 package com.shop.core.alipay.model;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
-import java.io.Serializable;
 
 /**
  * Alipass模版内容对象

@@ -4,7 +4,6 @@
  */
 package com.shop.core.alipay.model.request.template;
 
-
 import com.shop.core.alipay.model.request.BaseRequest;
 
 /**

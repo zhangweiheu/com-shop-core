@@ -1,8 +1,9 @@
-package com.shop.core.mybatis.enums;
+package com.shop.core.mybatis;
 
-import com.shop.core.mybatis.IEnumDesc;
-import com.shop.core.mybatis.IEnumValue;
-import com.shop.core.mybatis.ParseNameReplaceValue;
+
+import com.shop.core.mybatis.enums.IEnumDesc;
+import com.shop.core.mybatis.enums.IEnumValue;
+import com.shop.core.mybatis.enums.ParseNameReplaceValue;
 
 @ParseNameReplaceValue
 public enum ExpressStatusEnum implements IEnumDesc, IEnumValue {

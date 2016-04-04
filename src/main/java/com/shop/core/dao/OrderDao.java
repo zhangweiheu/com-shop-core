@@ -1,6 +1,6 @@
 package com.shop.core.dao;
 
-import com.shop.core.model.Order;
+import com.shop.core.model.OrderForm;
 
 import java.util.List;
 
@@ -8,19 +8,19 @@ import java.util.List;
  * Created by zhang on 2016/3/24.
  */
 public interface OrderDao {
-    List<Order> listAllOrder(int offset, int pageSize);
+    List<OrderForm> listAllOrder(int offset, int pageSize);
 
-    int countAllOrderByAttr(Order order);
+    int countAllOrderByAttr(OrderForm order);
 
-    List<Order> listOrdersByAttr(int offset, int pageSize, Order order);
+    List<OrderForm> listOrdersByAttr(int offset, int pageSize, OrderForm order);
 
-    Order findOrderById(int Oid);
+    OrderForm findOrderById(int Oid);
 
-    List<Order> findOrderByUid(int Uid);
+    List<OrderForm> findOrderByUid(int Uid);
 
     int deleteOrdersById(int Oid);
 
-    int updateOrder(Order order);
+    int updateOrder(OrderForm order);
 
-    int saveOrder(Order order);
+    int saveOrder(OrderForm order);
 }

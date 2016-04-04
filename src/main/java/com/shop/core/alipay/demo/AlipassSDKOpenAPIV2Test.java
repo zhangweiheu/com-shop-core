@@ -20,13 +20,14 @@ import com.shop.core.alipay.model.request.template.TemplateModifyRequest;
 import com.shop.core.alipay.service.AlipassTransferV2Service;
 import com.shop.core.alipay.service.impl.AlipassTransferV2ServiceOpenAPIImpl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Alipass demo 2.0版本，对alipass的open api做简易封装。
- * 原生版本{@link com.alipay.alipass.sdk.demo}
+ * 原生版本{@link com.alipay.alipass.sdk.demo.AlipassSDKTest}
  *
  * @author mingqiu.gmq
  * @version $Id: AlipassSDKOpenAPIV2Test.java, v 0.1 2015年6月25日 下午3:26:38
@@ -36,6 +37,7 @@ public class AlipassSDKOpenAPIV2Test {
     private static ObjectMapper JSON = new ObjectMapper();
 
     private static AlipassTransferV2Service transferService;
+    private static String templateId = "2016040311340376412786805";
 
     // 设置app_auth_token参数，当isv代替商户发起接口调用时，需要传此参数；商户自主调用接口时，不需要传此参数
     private String appAuthToken = "";
@@ -45,21 +47,22 @@ public class AlipassSDKOpenAPIV2Test {
         transferService.init(AlipassSDKConstants.ALIPAY_GATEWAY, AlipassSDKConstants.APP_ID, AlipassSDKConstants.PRIVATE_KEY, AlipassSDKConstants.FORMAT, AlipassSDKConstants.CHARSET, AlipassSDKConstants.ALIPAY_PUBLIC_KEY);
 
         AlipassSDKOpenAPIV2Test demo = new AlipassSDKOpenAPIV2Test();
-        String templateId = "2016032321354504508882954";
 
-        // 创建模板
-        // templateId = demo.createTemplate();
-        // System.out.println("templateId = " + templateId);
+        String templateId = "2016040311340376412786805";
+
+        //         创建模板
+        //                templateId = demo.createTemplate();
+        System.out.println("templateId = " + templateId);
 
         // 修改模板
-        //  demo.modifyTemplate(templateId);
+        //        demo.modifyTemplate(templateId);
 
         // 添加卡券实例
-        demo.addPassInstance(templateId);
+            demo.addPassInstance(templateId);
 
+        //        demo.updatePassInstance("1073603201765620");
+        //        demo.closePassInstance("1073603201765620");
         // 修改卡券实例
-        // demo.updatePassInstance(templateId);
-
     }
 
     /**
@@ -69,14 +72,79 @@ public class AlipassSDKOpenAPIV2Test {
      * @throws Exception
      */
     private String createTemplate() throws Exception {
-        String content =
-                "{\"evoucherInfo\":{\"title\":\"$filmName$\",\"startDate\":\"$startDate$\",\"endDate\":\"$endDate$\",\"type\":\"eventTicket\",\"product\":\"groupon\","
-                        + "\"operation\":["
-                        + "{\"message\":\"$ackCode$\",\"messageEncoding\":\"UTF-8\",\"format\":\"wave\",\"altText\":\"$ackCode$\"},"
-                        + "{\"message\":\"$ackCode$\",\"messageEncoding\":\"UTF-8\",\"format\":\"barcode\",\"altText\":\"$ackCode$\"}" + "],"
-                        + "\"remindInfo\":{\"offset\":1},\"einfo\":{\"logoText\":\"$filmName$\",\"secondLogoText\":\"$secondLogoText$\",\"headFields\":[{\"key\":\"filmVersion\",\"value\":\"$filmVersion$\",\"label\":\"类型\",\"type\":\"text\"}],\"primaryFields\":[{\"key\":\"dayTime\",\"value\":\"$dayTime$\",\"label\":\"日期\",\"type\":\"text\"},{\"key\":\"hourTime\",\"value\":\"$hourTime$\",\"label\":\"时间\",\"type\":\"text\"}],\"secondaryFields\":[{\"key\":\"cinemaName\",\"value\":\"$cinemaName$\",\"label\":\"影院\",\"type\":\"text\"}],\"auxiliaryFields\":[{\"key\":\"hallName\",\"value\":\"$hallName$\",\"label\":\"影厅\",\"type\":\"text\"},{\"key\":\"count\",\"value\":\"$count$\",\"label\":\"张数\",\"type\":\"text\"},{\"key\":\"seatsInfo\",\"value\":\"$seatsInfo$\",\"label\":\"座位\",\"type\":\"text\"}],\"backFields\":[{\"key\":\"introduction\",\"value\":\"1. 选座票由时光代理，客服热线:4006-118-118\\n2. 电影票属特殊物品，出票成功后将不予退换，请按照场次时间使用\\n3. 电影票使用时，需去对应影院的时光网取票机或影院服务台进行取票\",\"label\":\"免责声明\",\"type\":\"text\"}]},\"locations\":[{\"addr\":\"$addr$\",\"tel\":\"$tel$\",\"relevantText\":\"$relevantText$\",\"longitude\":\"$longitude$\",\"latitude\":\"$latitude$\"}]},\"style\":{\"backgroundColor\":\"RGB(26,150,219)\"},\"fileInfo\":{\"canShare\":false,\"formatVersion\":\"2\",\"serialNumber\":\"$serialNumber$\"},\"merchant\":{\"mname\":\"Alipassprod\",\"mtel\":\"\",\"minfo\":\"\"},\"platform\":{\"channelID\":\"$channelID$\",\"webServiceUrl\":\"$webServiceUrl$\"},\"appInfo\":null,\"alipayVerify\":[]}";
-
-        String logo = "https://tfsimg.alipay.com/images/kabaoprod/T1uoldXeVlXXaCwpjX";
+        String content = "{\"evoucherInfo\":{" +
+                //                "\"goodsId\": \"\"," +
+                "\"title\":\"$title$\"," +
+                "\"type\":\"eventTicket\"," +
+                "\"product\":\"free\"," +
+                "\"startDate\":\"$startDate$\"," +
+                "\"endDate\": \"$endDate$\"," +
+                "\"operation\": [{\"format\": \"barcode\"," +
+                "\"message\": \"$ackCode$\"," +
+                "\"messageEncoding\": \"utf-8\"," +
+                "\"altText\": \"$ackCode$\"}]," +
+                "\"einfo\":{" +
+                "\"logoText\": \"$title$\"," +
+                "\"secondLogoText\": \"$secondLogoText$\"," +
+                "\"headFields\":[" +
+                "{\"key\": \"status\"," +
+                "\"label\": \"状态：\"," +
+                "\"value\": \"$status$\"," +
+                "\"type\": \"text\"" +
+                "}]," +
+                "\"primaryFields\": [" +
+                "{\"key\": \"strip\"," +
+                "\"label\": \"\"," +
+                "\"value\": \"$strip$\"," +
+                "\"type\": \"text\"" +
+                "}]," +
+                "\"secondaryFields\": [" +
+                "{\"key\": \"validDate\"," +
+                "\"label\": \"有效期至：\"," +
+                "\"value\": \"$validDate$\"," +
+                "\"type\": \"text\"" +
+                "}]," +
+                "\"auxiliaryFields\": [" +
+                "{\"key\": \"serialNumber\"," +
+                "\"label\": \"优惠券序列号：\"," +
+                "\"value\": \"$serialNumber$\"," +
+                "\"type\": \"text\"" +
+                "}]," +
+                "\"backFields\": [" +
+                "{\"key\": \"description\"," +
+                "\"label\": \"详情描述\"," +
+                "\"value\": \"1.该优惠有效期：截止至2016年03月18日；\n2.凭此券可以享受以下优惠：\n享免单优惠\n不与其他优惠同享。详询商家。\"," +
+                "\"type\": \"text\"" +
+                "},{" +
+                "\"key\": \"disclaimer\"," +
+                "\"label\": \"免责声明\"," +
+                "\"value\": \"除特殊注明外，本优惠不能与其他优惠同时享受； 本优惠最终解释权归商家所有，如有疑问请与商家联系。 提示：为了使您得到更好的服务，请在进店时出示本券。\"," +
+                "\"type\": \"text\"" +
+                "}]" +
+                "}," +
+                "\"locations\": []" +
+                "}," +
+                "\"merchant\": {" +
+                "\"mname\": \"张伟\"," +
+                "\"mtel\": \"\"," +
+                "\"minfo\": \"\"" +
+                "},\"platform\": {" +
+                "\"channelID\": \"$channelID$\"," +
+                "\"webServiceUrl\": \"$webServiceUrl$\"" +
+                "},\"style\": {" +
+                "\"backgroundColor\": \"rgb(246,150,219)\"" +
+                "},\"fileInfo\": {" +
+                "\"formatVersion\": \"2\"," +
+                "\"canShare\": true," +
+                "\"canBuy\": false," +
+                "\"canPresent\": true," +
+                "\"serialNumber\": \"$serialNumber$\"," +
+                "\"supportTaxi\": \"false\"," +
+                "\"taxiSchemaUrl\": \"$taxiSchemaUrl$\"" +
+                "},\"appInfo\": null," +
+                "\"alipayVerify\": []" +
+                "}";
+        String logo = "http://7xo04n.com1.z0.glb.clouddn.com/mz.png";
 
         // 组装接口入参参数
         TemplateCreateRequest templateReq = new TemplateCreateRequest();
@@ -109,14 +177,79 @@ public class AlipassSDKOpenAPIV2Test {
      * @throws AlipayApiException
      */
     private void modifyTemplate(String templateId) throws Exception {
-
-        String content =
-                "{\"evoucherInfo\":{\"title\":\"$filmName$\",\"startDate\":\"$startDate$\",\"endDate\":\"$endDate$\",\"type\":\"eventTicket\",\"product\":\"groupon\","
-                        + "\"operation\":["
-                        + "{\"message\":\"$ackCode$\",\"messageEncoding\":\"UTF-8\",\"format\":\"wave\",\"altText\":\"$ackCode$\"},"
-                        + "{\"message\":\"$ackCode$\",\"messageEncoding\":\"UTF-8\",\"format\":\"barcode\",\"altText\":\"$ackCode$\"}" + "],"
-                        + "\"remindInfo\":{\"offset\":1},\"einfo\":{\"logoText\":\"$filmName$\",\"secondLogoText\":\"$secondLogoText$\",\"headFields\":[{\"key\":\"filmVersion\",\"value\":\"$filmVersion$\",\"label\":\"类型\",\"type\":\"text\"}],\"primaryFields\":[{\"key\":\"dayTime\",\"value\":\"$dayTime$\",\"label\":\"日期\",\"type\":\"text\"},{\"key\":\"hourTime\",\"value\":\"$hourTime$\",\"label\":\"时间\",\"type\":\"text\"}],\"secondaryFields\":[{\"key\":\"cinemaName\",\"value\":\"$cinemaName$\",\"label\":\"影院\",\"type\":\"text\"}],\"auxiliaryFields\":[{\"key\":\"hallName\",\"value\":\"$hallName$\",\"label\":\"影厅\",\"type\":\"text\"},{\"key\":\"count\",\"value\":\"$count$\",\"label\":\"张数\",\"type\":\"text\"},{\"key\":\"seatsInfo\",\"value\":\"$seatsInfo$\",\"label\":\"座位\",\"type\":\"text\"}],\"backFields\":[{\"key\":\"introduction\",\"value\":\"1. 选座票由时光代理，客服热线:4006-118-118\\n2. 电影票属特殊物品，出票成功后将不予退换，请按照场次时间使用\\n3. 电影票使用时，需去对应影院的时光网取票机或影院服务台进行取票\",\"label\":\"免责声明\",\"type\":\"text\"}]},\"locations\":[{\"addr\":\"$addr$\",\"tel\":\"$tel$\",\"relevantText\":\"$relevantText$\",\"longitude\":\"$longitude$\",\"latitude\":\"$latitude$\"}]},\"style\":{\"backgroundColor\":\"RGB(26,150,219)\"},\"fileInfo\":{\"canShare\":false,\"formatVersion\":\"2\",\"serialNumber\":\"$serialNumber$\"},\"merchant\":{\"mname\":\"Alipassprod\",\"mtel\":\"\",\"minfo\":\"\"},\"platform\":{\"channelID\":\"$channelID$\",\"webServiceUrl\":\"$webServiceUrl$\"},\"appInfo\":null,\"alipayVerify\":[]}";
-        String logo = "https://tfsimg.alipay.com/images/kabaoprod/T16qXeXXBlXXaCwpjX";
+        String content = "{\"evoucherInfo\":{" +
+                //                "\"goodsId\": \"\"," +
+                "\"title\":\"$title$\"," +
+                "\"type\":\"eventTicket\"," +
+                "\"product\":\"free\"," +
+                "\"startDate\":\"$startDate$\"," +
+                "\"endDate\": \"$endDate$\"," +
+                "\"operation\": [{\"format\": \"barcode\"," +
+                "\"message\": \"$ackCode$\"," +
+                "\"messageEncoding\": \"utf-8\"," +
+                "\"altText\": \"$ackCode$\"}]," +
+                "\"einfo\":{" +
+                "\"logoText\": \"$title$\"," +
+                "\"secondLogoText\": \"$secondLogoText$\"," +
+                "\"headFields\":[" +
+                "{\"key\": \"status\"," +
+                "\"label\": \"状态：\"," +
+                "\"value\": \"$status$\"," +
+                "\"type\": \"text\"" +
+                "}]," +
+                "\"primaryFields\": [" +
+                "{\"key\": \"strip\"," +
+                "\"label\": \"\"," +
+                "\"value\": \"$strip$\"," +
+                "\"type\": \"text\"" +
+                "}]," +
+                "\"secondaryFields\": [" +
+                "{\"key\": \"validDate\"," +
+                "\"label\": \"有效期至：\"," +
+                "\"value\": \"$validDate$\"," +
+                "\"type\": \"text\"" +
+                "}]," +
+                "\"auxiliaryFields\": [" +
+                "{\"key\": \"serialNumber\"," +
+                "\"label\": \"优惠券序列号：\"," +
+                "\"value\": \"$serialNumber$\"," +
+                "\"type\": \"text\"" +
+                "}]," +
+                "\"backFields\": [" +
+                "{\"key\": \"description\"," +
+                "\"label\": \"详情描述\"," +
+                "\"value\": \"1.该优惠有效期：截止至2016年03月18日；\n2.凭此券可以享受以下优惠：\n享免单优惠\n不与其他优惠同享。详询商家。\"," +
+                "\"type\": \"text\"" +
+                "},{" +
+                "\"key\": \"disclaimer\"," +
+                "\"label\": \"免责声明\"," +
+                "\"value\": \"除特殊注明外，本优惠不能与其他优惠同时享受； 本优惠最终解释权归商家所有，如有疑问请与商家联系。 提示：为了使您得到更好的服务，请在进店时出示本券。\"," +
+                "\"type\": \"text\"" +
+                "}]" +
+                "}," +
+                "\"locations\": []" +
+                "}," +
+                "\"merchant\": {" +
+                "\"mname\": \"张伟\"," +
+                "\"mtel\": \"\"," +
+                "\"minfo\": \"\"" +
+                "},\"platform\": {" +
+                "\"channelID\": \"$channelID$\"," +
+                "\"webServiceUrl\": \"$webServiceUrl$\"" +
+                "},\"style\": {" +
+                "\"backgroundColor\": \"rgb(246,150,219)\"" +
+                "},\"fileInfo\": {" +
+                "\"formatVersion\": \"2\"," +
+                "\"canShare\": true," +
+                "\"canBuy\": false," +
+                "\"canPresent\": true," +
+                "\"serialNumber\": \"$serialNumber$\"," +
+                "\"supportTaxi\": \"false\"," +
+                "\"taxiSchemaUrl\": \"\"" +
+                "},\"appInfo\": null," +
+                "\"alipayVerify\": []" +
+                "}";
+        String logo = "http://7xo04n.com1.z0.glb.clouddn.com/mz.png";
 
         TemplateModifyRequest templateReq = new TemplateModifyRequest();
         templateReq.setAppAuthToken(appAuthToken);
@@ -137,40 +270,57 @@ public class AlipassSDKOpenAPIV2Test {
     /**
      * 添加卡券实例
      *
+     * @param appAuthToken
      * @param templateId
      * @throws Exception
      */
     private void addPassInstance(String templateId) throws Exception {
         //TODO: 注意：alipass的唯一标识，商户请使用外部交易号作为serialNumber
-        String serialNumber = generateNumber(16);
+        //        String serialNumber = GenerateNumber.generateNumber(16);
+        String serialNumber = "1073603201765620";
         System.out.println(serialNumber);
 
         Map<String, String> paramValuePair = new HashMap<String, String>();
-        paramValuePair.put("status", "可使用");
-        paramValuePair.put("providerPhone", "15663461691");
+        paramValuePair.put("title", "i美妆优惠券");
+        paramValuePair.put("startDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        paramValuePair.put("endDate", "2016-09-18 23:59:59");
+        paramValuePair.put("ackCode", serialNumber);
         paramValuePair.put("serialNumber", serialNumber);
+        paramValuePair.put("secondLogoText", "");
+        paramValuePair.put("status", "可使用");
+        paramValuePair.put("strip", "凭此券即可免单一次");
+        paramValuePair.put("validDate", "2016-09-18 23:59:59");
         paramValuePair.put("channelID", AlipassSDKConstants.APP_ID);
-
+        paramValuePair.put("webServiceUrl", "");
+        //        paramValuePair.put("description", "1.该优惠有效期：截止至2016年03月18日；\n2.凭此券可以享受以下优惠：\n享免单优惠\n不与其他优惠同享。详询商家。");
+        //        paramValuePair.put("disclaimer", "除特殊注明外，本优惠不能与其他优惠同时享受； 本优惠最终解释权归商家所有，如有疑问请与商家联系。 提示：为了使您得到更好的服务，请在进店时出示本券。");
 
         Map<String, String> userParams = new HashMap<String, String>();
-        userParams.put(BaseAddRequest.PARTNER_ID, AlipassSDKConstants.PID);
-        //TODO:填写外部交易号
-        userParams.put(BaseAddRequest.OUT_TRADE_NO, "201603036737");
+        userParams.put(BaseAddRequest.MOBILE, "15663461691");
+        userParams.put("ackCode", serialNumber);
+        userParams.put("verify_code", serialNumber);
+        userParams.put("serialNumber", serialNumber);
 
+        //        userParams.put(BaseAddRequest.PARTNER_ID, "2088802441917053");
+        //        userParams.put(BaseAddRequest.OUT_TRADE_NO, "2016040300001000720089930634");
 
         AddPassInstanceRequest addReq = new AddPassInstanceRequest();
         addReq.setAppAuthToken(appAuthToken);
         addReq.setTemplateId(templateId);
         addReq.setTemplateParamValuePair(paramValuePair);
-        addReq.setUserType(RecognitionTypeEnum.TRADE);
+        addReq.setUserType(RecognitionTypeEnum.MOBILE);
+        //        addReq.setUserType(RecognitionTypeEnum.TRADE);
         addReq.setUserTypeParams(userParams);
-
 
         AlipayPassInstanceAddResponse res = transferService.addPassInstance(addReq);
         if (res.isSuccess()) {
             // TODO 具体业务处理
+            System.out.print("yes");
+            //            updatePassInstance(serialNumber);
+            //            closePassInstance(serialNumber);
         } else {
             // TODO 异常业务处理
+            System.out.print("no");
         }
         System.out.println(
                 "新增卡券实例结果：success=" + res.isSuccess() + ",result=" + res.getResult() + ",subCode=" + res.getSubCode() + ",subMsg=" + res.getSubMsg());
@@ -180,24 +330,25 @@ public class AlipassSDKOpenAPIV2Test {
     /**
      * 更新卡券实例
      *
+     * @param appAuthToken
      * @param templateId
      * @throws Exception
      */
-    private void updatePassInstance(String templateId) throws Exception {
-        //TODO:注意：alipass的唯一标识，商户请使用外部交易号作为serialNumber。更新卡券实例，必填字段
-        String serialNumber = "4534744160077235";
+    private void updatePassInstance(String serialNumber) throws Exception {
 
         UpdatePassInstanceRequest request = new UpdatePassInstanceRequest();
         request.setAppAuthToken(appAuthToken);
 
         request.setSerialNumber(serialNumber);
         request.setChannelId(AlipassSDKConstants.APP_ID);
-        Map<String, String> templateParamValuePair = new HashMap<String, String>();
-        templateParamValuePair.put("filmVersion", "5D");
+        Map<String, String> templateParamValuePair = new HashMap<>();
+        templateParamValuePair.put("status", "已使用");
+        templateParamValuePair.put("endDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         request.setTemplateParamValuePair(templateParamValuePair);
         request.setStatus(PassStatus.PASS_STATUS_USED);
-        request.setVerifyType("wave");
-        request.setVerifyCode("231311");
+        request.setVerifyType("barcode");
+        request.setVerifyCode(serialNumber);
+
         AlipayPassInstanceUpdateResponse res = transferService.updatePassInstance(request);
         if (res.isSuccess()) {
             // TODO 具体业务处理
@@ -208,32 +359,32 @@ public class AlipassSDKOpenAPIV2Test {
                 "修改卡券实例结果：success=" + res.isSuccess() + ",result=" + res.getResult() + ",subCode=" + res.getSubCode() + ",subMsg=" + res.getSubMsg());
     }
 
-    /**
-     * 生成随机数字，用于生成随机Serialnumber
-     *
-     * @param codeLength
-     * @return
-     */
-    public static String generateNumber(int codeLength) {
-        // 10个数字
-        final int maxNum = 8;
-        int i; // 生成的随机数
-        int count = 0; // 生成的密码的长度
-        char[] str = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    private void closePassInstance(String serialNumber) throws Exception {
+        //        String serialNumber = "4534744160077235";
 
-        StringBuffer pwd = new StringBuffer("");
-        Random r = new Random();
-        while (count < codeLength) {
-            // 生成随机数，取绝对值，防止生成负数
-            i = Math.abs(r.nextInt(maxNum)); // 生成的数最大为36-1
+        UpdatePassInstanceRequest request = new UpdatePassInstanceRequest();
+        request.setAppAuthToken(appAuthToken);
 
-            if (i >= 0 && i < str.length) {
-                pwd.append(str[i]);
-                count++;
-            }
+        request.setSerialNumber(serialNumber);
+        request.setChannelId(AlipassSDKConstants.APP_ID);
+        Map<String, String> templateParamValuePair = new HashMap<>();
+        templateParamValuePair.put("status", "已使用");
+        templateParamValuePair.put("endDate", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        request.setTemplateParamValuePair(templateParamValuePair);
+        request.setStatus(PassStatus.PASS_STATUS_CLOSED);
+        request.setVerifyType("barcode");
+        request.setVerifyCode(serialNumber);
+
+        AlipayPassInstanceUpdateResponse res = transferService.updatePassInstance(request);
+        if (res.isSuccess()) {
+            // TODO 具体业务处理
+        } else {
+            // TODO 异常业务处理
         }
-
-        return pwd.toString();
+        System.out.println(
+                "修改卡券实例结果：success=" + res.isSuccess() + ",result=" + res.getResult() + ",subCode=" + res.getSubCode() + ",subMsg=" + res.getSubMsg());
     }
+
+
 
 }

@@ -4,8 +4,11 @@
  */
 package com.shop.core.alipay.service.impl;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.TreeMap;
 
-
+import com.shop.core.alipay.utils.StringUtil;
 import com.shop.core.alipay.enums.Constants;
 import com.shop.core.alipay.enums.FileName;
 import com.shop.core.alipay.enums.PicName;
@@ -13,11 +16,10 @@ import com.shop.core.alipay.enums.Result;
 import com.shop.core.alipay.model.AlipassModel;
 import com.shop.core.alipay.model.ResponseModel;
 import com.shop.core.alipay.service.AlipassGenerateService;
-import com.shop.core.alipay.utils.*;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.TreeMap;
+import com.shop.core.alipay.utils.ExtendStringUtil;
+import com.shop.core.alipay.utils.FileGenerateUtils;
+import com.shop.core.alipay.utils.FileUtils;
+import com.shop.core.alipay.utils.ValidateUtils;
 
 /**
  * AlipassGenerateService接口的实现类，接收参数并返回alipass文件
@@ -30,6 +32,7 @@ public class AlipassGenerateServiceImpl implements AlipassGenerateService {
      * 接收AlipassModel对象，校验并根据生成规则生成alipass文件。
      * @param alipassModel
      * @return
+     * @see com.alipay.alipass.sdk.service.AlipassGenerateService#alipassGenerate(com.alipay.alipass.sdk.model.AlipassModel)
      */
     public ResponseModel alipassGenerate(AlipassModel alipassModel, String privateKey,
                                          HashMap<PicName, byte[]> picMap, Object... objects) {
@@ -161,6 +164,7 @@ public class AlipassGenerateServiceImpl implements AlipassGenerateService {
      * 获取临时文件存储目录
      * @param alipassresult 
      * @param serialNumber
+     * @param objects 
      * @return
      */
     private String getTempFilePath(Result alipassresult, String serialNumber) {

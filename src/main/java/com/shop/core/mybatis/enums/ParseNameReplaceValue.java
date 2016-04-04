@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.shop.core.mybatis;
+package com.shop.core.mybatis.enums;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

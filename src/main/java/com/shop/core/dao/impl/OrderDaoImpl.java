@@ -2,10 +2,10 @@ package com.shop.core.dao.impl;
 
 import com.shop.core.dao.OrderDao;
 import com.shop.core.mapper.OrderDetailMapper;
-import com.shop.core.mapper.OrderMapper;
-import com.shop.core.model.Order;
-import com.shop.core.model.OrderCondition;
+import com.shop.core.mapper.OrderFormMapper;
 import com.shop.core.model.OrderDetailCondition;
+import com.shop.core.model.OrderForm;
+import com.shop.core.model.OrderFormCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
@@ -19,39 +19,39 @@ import java.util.List;
 public class OrderDaoImpl implements OrderDao {
 
     @Autowired
-    OrderMapper orderMapper;
+    OrderFormMapper orderMapper;
 
     @Autowired
     OrderDetailMapper orderDetailMapper;
 
     @Override
-    public List<Order> listAllOrder(int offset, int pageSize) {
-        OrderCondition condition = new OrderCondition();
+    public List<OrderForm> listAllOrder(int offset, int pageSize) {
+        OrderFormCondition condition = new OrderFormCondition();
         condition.setLimitOffset(offset);
         condition.setLimitSize(pageSize);
         return orderMapper.selectByCondition(condition);
     }
 
     @Override
-    public int countAllOrderByAttr(Order order) {
+    public int countAllOrderByAttr(OrderForm order) {
         return orderMapper.countByCondition(convertOrder2Condition(null, null, order));
     }
 
     @Override
-    public List<Order> listOrdersByAttr(int offset, int pageSize, Order order) {
+    public List<OrderForm> listOrdersByAttr(int offset, int pageSize, OrderForm order) {
         return orderMapper.selectByCondition(convertOrder2Condition(offset, pageSize, order));
     }
 
     @Override
-    public Order findOrderById(int Oid) {
+    public OrderForm findOrderById(int Oid) {
         return orderMapper.selectById(Oid);
     }
 
     @Override
-    public List<Order> findOrderByUid(int Uid) {
-        Order order = new Order();
-        order.setUserId(Uid);
-        List<Order> list = orderMapper.selectByCondition(convertOrder2Condition(null, null, order));
+    public List<OrderForm> findOrderByUid(int Uid) {
+        OrderForm order = new OrderForm();
+        order.setUid(Uid);
+        List<OrderForm> list = orderMapper.selectByCondition(convertOrder2Condition(null, null, order));
         return CollectionUtils.isEmpty(list) ? null : list;
     }
 
@@ -64,17 +64,17 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public int updateOrder(Order order) {
-        return orderMapper.updateById(order);
+    public int updateOrder(OrderForm order) {
+        return orderMapper.updateByIdSelective(order);
     }
 
     @Override
-    public int saveOrder(Order order) {
-        return orderMapper.insert(order);
+    public int saveOrder(OrderForm order) {
+        return orderMapper.insertSelective(order);
     }
 
-    private OrderCondition convertOrder2Condition(Integer offset, Integer pageSize, Order order) {
-        OrderCondition condition = new OrderCondition();
+    private OrderFormCondition convertOrder2Condition(Integer offset, Integer pageSize, OrderForm order) {
+        OrderFormCondition condition = new OrderFormCondition();
         if (null != offset) {
             condition.setLimitOffset(offset);
         }
@@ -95,8 +95,8 @@ public class OrderDaoImpl implements OrderDao {
             condition.createCriteria().andExpressStatusEqualTo(order.getExpressStatus());
         }
 
-        if (null != order.getUserId()) {
-            condition.createCriteria().andUserIdEqualTo(order.getUserId());
+        if (null != order.getUid()) {
+            condition.createCriteria().andUidEqualTo(order.getUid());
         }
 
         if (null != order.getOrderPrice()) {

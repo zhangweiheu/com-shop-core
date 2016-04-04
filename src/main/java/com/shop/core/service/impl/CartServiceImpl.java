@@ -1,10 +1,13 @@
 package com.shop.core.service.impl;
 
 import com.shop.core.dao.OrderDetailDao;
+import com.shop.core.mapper.OrderDetailMapper;
 import com.shop.core.model.OrderDetail;
+import com.shop.core.model.OrderDetailCondition;
 import com.shop.core.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -16,11 +19,22 @@ public class CartServiceImpl implements CartService {
     @Autowired
     OrderDetailDao orderDetailDao;
 
+    @Autowired
+    OrderDetailMapper orderDetailMapper;
+
+    @Override
+    public OrderDetail findOrderDetailByAttr(OrderDetail orderDetail) {
+        OrderDetailCondition condition = new OrderDetailCondition();
+        condition.createCriteria().andUidEqualTo(orderDetail.getUid()).andOrderIdIsNull().andGoodsIdEqualTo(orderDetail.getGoodsId());
+        List<OrderDetail> orderDetails = orderDetailMapper.selectByCondition(condition);
+        return CollectionUtils.isEmpty(orderDetails) ? null : orderDetails.get(0);
+    }
+
     @Override
     public int getTotalCountByUid(int uid) {
-        OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setUserId(uid);
-        return orderDetailDao.countAllOrderByAttr(orderDetail);
+        OrderDetailCondition condition = new OrderDetailCondition();
+        condition.createCriteria().andUidEqualTo(uid).andOrderIdIsNull();
+        return orderDetailMapper.countByCondition(condition);
     }
 
     @Override
@@ -40,8 +54,10 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<OrderDetail> listUserAllCart(int offset, int pageSize, int uid) {
-        OrderDetail orderDetail = new OrderDetail();
-        orderDetail.setUserId(uid);
-        return orderDetailDao.listCart(offset, pageSize, orderDetail);
+        OrderDetailCondition condition = new OrderDetailCondition();
+        condition.setLimitOffset(offset);
+        condition.setLimitSize(pageSize);
+        condition.createCriteria().andUidEqualTo(uid).andOrderIdIsNull();
+        return orderDetailMapper.selectByCondition(condition);
     }
 }

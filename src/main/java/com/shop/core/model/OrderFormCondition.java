@@ -1,11 +1,11 @@
 package com.shop.core.model;
 
-import com.shop.core.mybatis.enums.ExpressStatusEnum;
+import com.shop.core.mybatis.ExpressStatusEnum;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderCondition {
+public class OrderFormCondition {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -16,7 +16,7 @@ public class OrderCondition {
 
     protected int limitSize = 1;
 
-    public OrderCondition() {
+    public OrderFormCondition() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -186,63 +186,63 @@ public class OrderCondition {
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNull() {
-            addCriterion("user_id is null");
+        public Criteria andUidIsNull() {
+            addCriterion("uid is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNotNull() {
-            addCriterion("user_id is not null");
+        public Criteria andUidIsNotNull() {
+            addCriterion("uid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdEqualTo(Integer value) {
-            addCriterion("user_id =", value, "userId");
+        public Criteria andUidEqualTo(Integer value) {
+            addCriterion("uid =", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotEqualTo(Integer value) {
-            addCriterion("user_id <>", value, "userId");
+        public Criteria andUidNotEqualTo(Integer value) {
+            addCriterion("uid <>", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThan(Integer value) {
-            addCriterion("user_id >", value, "userId");
+        public Criteria andUidGreaterThan(Integer value) {
+            addCriterion("uid >", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("user_id >=", value, "userId");
+        public Criteria andUidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("uid >=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThan(Integer value) {
-            addCriterion("user_id <", value, "userId");
+        public Criteria andUidLessThan(Integer value) {
+            addCriterion("uid <", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("user_id <=", value, "userId");
+        public Criteria andUidLessThanOrEqualTo(Integer value) {
+            addCriterion("uid <=", value, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIn(List<Integer> values) {
-            addCriterion("user_id in", values, "userId");
+        public Criteria andUidIn(List<Integer> values) {
+            addCriterion("uid in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotIn(List<Integer> values) {
-            addCriterion("user_id not in", values, "userId");
+        public Criteria andUidNotIn(List<Integer> values) {
+            addCriterion("uid not in", values, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("user_id between", value1, value2, "userId");
+        public Criteria andUidBetween(Integer value1, Integer value2) {
+            addCriterion("uid between", value1, value2, "uid");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("user_id not between", value1, value2, "userId");
+        public Criteria andUidNotBetween(Integer value1, Integer value2) {
+            addCriterion("uid not between", value1, value2, "uid");
             return (Criteria) this;
         }
 
@@ -363,6 +363,76 @@ public class OrderCondition {
 
         public Criteria andExpressStatusNotBetween(ExpressStatusEnum value1, ExpressStatusEnum value2) {
             addCriterion("express_status not between", value1, value2, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberIsNull() {
+            addCriterion("serial_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberIsNotNull() {
+            addCriterion("serial_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberEqualTo(String value) {
+            addCriterion("serial_number =", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberNotEqualTo(String value) {
+            addCriterion("serial_number <>", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberGreaterThan(String value) {
+            addCriterion("serial_number >", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberGreaterThanOrEqualTo(String value) {
+            addCriterion("serial_number >=", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberLessThan(String value) {
+            addCriterion("serial_number <", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberLessThanOrEqualTo(String value) {
+            addCriterion("serial_number <=", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberLike(String value) {
+            addCriterion("serial_number like", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberNotLike(String value) {
+            addCriterion("serial_number not like", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberIn(List<String> values) {
+            addCriterion("serial_number in", values, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberNotIn(List<String> values) {
+            addCriterion("serial_number not in", values, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberBetween(String value1, String value2) {
+            addCriterion("serial_number between", value1, value2, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberNotBetween(String value1, String value2) {
+            addCriterion("serial_number not between", value1, value2, "serialNumber");
             return (Criteria) this;
         }
 
