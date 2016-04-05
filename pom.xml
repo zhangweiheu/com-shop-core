@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>exams-system-parent</artifactId>
         <groupId>com.online</groupId>
+        <artifactId>exams-system-parent</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
 
